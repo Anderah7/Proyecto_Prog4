@@ -9,10 +9,12 @@ int main (void){
 
 	if (abrir) {
 	    printf("Error al conectar a la bd: %s\n", sqlite3_errmsg(db));
-	    return 1;
+	    return abrir;
 	} else {
 	    printf("Conectado a la bd\n");
 	}
+
+	crearTablas(db);
 
 	sqlite3_close(db);
 
