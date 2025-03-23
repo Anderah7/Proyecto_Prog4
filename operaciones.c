@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include "operaciones.h"
 #include "sqlite3.h"
+#include <stdlib.h>
+#include <string.h>
 
 void crearTablas(sqlite3 *db) {
 
@@ -22,7 +24,9 @@ void crearTablas(sqlite3 *db) {
 			"nombre VARCHAR(30), "
 			"precio REAL, "
 			"id_Proveedor INT(5), "
-			"FOREIGN KEY(id_Proveedor) REFERENCES proveedor(id_Proveedor));"
+			"cod_Seccion INT(5), "
+			"FOREIGN KEY(id_Proveedor) REFERENCES proveedor(id_Proveedor), "
+			"FOREIGN KEY(cod_Seccion) REFERENCES seccion(cod_Seccion));"
 
 			"CREATE TABLE IF NOT EXISTS departamento("
 			"id_Departamento INT(5) PRIMARY KEY, "
@@ -45,9 +49,74 @@ void crearTablas(sqlite3 *db) {
 		sqlite3_free(mensajeError);
 	}
 	else {
-		printf("Tablas creadas correctamente");
+		printf("Tablas creadas correctamente\n");
 	}
 
+}
+
+void insertarProductos(sqlite3 * db) {
+	char * mensajeError = 0;
+
+	const char *sql =
+	        "INSERT INTO producto (id_Producto, nombre, precio, id_Proveedor, cod_Seccion) VALUES "
+	        "(1, 'Huevos', 2.99, 1, 1), "
+	        "(2, 'Leche', 1.50, 2, 1), "
+	        "(3, 'Queso', 4.55, 3, 1), "
+	        "(4, 'Filete de ternera', 5.99, 1, 1), "
+	        "(5, 'Pechugas de pollo', 4.75, 2, 1), "
+	        "(6, 'Alitas de pollo', 8.99, 4, 2), "
+	        "(7, 'Manzana', 0.70, 3, 2), "
+	        "(8, 'Pera', 0.60, 5, 2), "
+	        "(9, 'Arroz blanco', 1.15, 4, 2), "
+	        "(10, 'Macarrones', 1.70, 1, 2);";
+
+	int ejecutar = sqlite3_exec(db, sql, 0, 0, &mensajeError);
+
+	if (ejecutar != SQLITE_OK) {
+	    printf("Error al insertar productos: %s\n", mensajeError);
+	    sqlite3_free(mensajeError);
+	}
+	else {
+		printf("Productos insertados correctamente.\n");
+	}
+}
+
+int mostrarProductos(sqlite3 *db, Producto **productos) {
+
+	sqlite3_stmt *stmt;
+
+	char sql[] = "select id_Producto, nombre, precio, id_Proveedor, cod_Seccion from producto";
+	int contador = 0;
+
+	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	while (sqlite3_step(stmt) == SQLITE_ROW) {
+	    contador++;
+	}
+
+	sqlite3_reset(stmt);
+
+	*productos = (Producto *)malloc(contador * sizeof(Producto));
+
+	int i = 0;
+	while (sqlite3_step(stmt) == SQLITE_ROW) {
+	    (*productos)[i].idProd = sqlite3_column_int(stmt, 0);
+	    strncpy((*productos)[i].nombreProd, (const char *)sqlite3_column_text(stmt, 1), sizeof((*productos)[i].nombreProd) - 1);
+	    (*productos)[i].nombreProd[sizeof((*productos)[i].nombreProd) - 1] = '\0';
+	    (*productos)[i].precio = (float)sqlite3_column_double(stmt, 2);
+	    (*productos)[i].codProveedor = sqlite3_column_int(stmt, 3);
+	    (*productos)[i].codSeccion = sqlite3_column_int(stmt, 4);
+	    i++;
+	    }
+
+	sqlite3_finalize(stmt);
+
+	return contador;
 }
 
 

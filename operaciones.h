@@ -39,4 +39,8 @@ typedef struct {
 
 void crearTablas(sqlite3 *db);
 
+void insertarProductos(sqlite3 * db);
+
+int mostrarProductos(sqlite3 *db, Producto **productos);
+
 #endif

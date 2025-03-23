@@ -16,6 +16,15 @@ int main (void){
 
 	crearTablas(db);
 
+	insertarProductos(db);
+
+	Producto *productos = NULL;
+	//int num_productos = mostrarProductos(db, &productos);
+
+	//for (int i = 0; i < num_productos; ++i) {
+		//printf("ID: %d, Nombre: %s, Precio: %.2f, Proveedor: %d, Seccion: %d\n", productos[i].idProd, productos[i].nombreProd, productos[i].precio, productos[i].codProveedor, productos[i].codSeccion);
+	//}
+
 	sqlite3_close(db);
 
 }
