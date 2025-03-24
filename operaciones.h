@@ -47,10 +47,6 @@ int compararPorPrecio(const void *a, const void *b);
 
 void ordenarEstante(Producto *productos, int num_productos, Producto ***productosEstante);
 
-<<<<<<< HEAD
 void leerFicheros (Departamento departamentos[], Empleado empleados[], Producto productos[], Proveedor proveedores[], Seccion secciones[]);
 
-
-=======
->>>>>>> branch 'main' of https://github.com/Anderah7/Proyecto_Prog4.git
 #endif

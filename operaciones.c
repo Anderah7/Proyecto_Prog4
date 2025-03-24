@@ -122,7 +122,7 @@ int mostrarProductos(sqlite3 *db, Producto **productos) {
 int compararPorPrecio(const void *a, const void *b) {
 	Producto *p1 = (Producto *)a;
 	Producto *p2 = (Producto *)b;
-<<<<<<< HEAD
+
 
 	if (p1->precio < p2->precio) return 1;
 	if (p1->precio > p2->precio) return -1;
@@ -251,15 +251,6 @@ void leerFicheros (Departamento departamentos[], Empleado empleados[], Producto 
 }
 
 
-=======
->>>>>>> branch 'main' of https://github.com/Anderah7/Proyecto_Prog4.git
 
-	if (p1->precio < p2->precio) return 1;
-	if (p1->precio > p2->precio) return -1;
-	return 0;
-}
 
-void ordenarEstante(Producto *productos, int num_productos, Producto ***productosEstante) {
-
-}
 
