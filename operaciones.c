@@ -73,7 +73,7 @@ void insertarProductos(sqlite3 * db) {
 	int ejecutar = sqlite3_exec(db, sql, 0, 0, &mensajeError);
 
 	if (ejecutar != SQLITE_OK) {
-	    printf("Error al insertar productos: %s\n", mensajeError);
+	    printf("Error al insertar productos/Productos ya insertados: %s\n", mensajeError);
 	    sqlite3_free(mensajeError);
 	}
 	else {
@@ -118,6 +118,137 @@ int mostrarProductos(sqlite3 *db, Producto **productos) {
 
 	return contador;
 }
+
+int compararPorPrecio(const void *a, const void *b) {
+	Producto *p1 = (Producto *)a;
+	Producto *p2 = (Producto *)b;
+
+	if (p1->precio < p2->precio) return 1;
+	if (p1->precio > p2->precio) return -1;
+	return 0;
+}
+
+void ordenarEstante(Producto *productos, int num_productos, Producto ***productosEstante) {
+
+}
+
+
+
+void leerFicheros (Departamento departamentos[], Empleado empleados[], Producto productos[], Proveedor proveedores[], Seccion secciones[]){
+	FILE *ficheroDepartamentos = fopen("datosIniciales/departamento.csv", "r");
+	FILE *ficheroEmpleados = fopen("datosIniciales/empleados.csv", "r");
+	FILE *ficheroProductos = fopen("datosIniciales/productos.csv", "r");
+	FILE *ficheroProveedores = fopen("datosIniciales/proveedores.csv", "r");
+	FILE *ficheroSecciones = fopen("datosIniciales/secciones.csv", "r");
+
+
+	if (ficheroDepartamentos == NULL || ficheroEmpleados == NULL || ficheroProductos == NULL || ficheroProveedores == NULL || ficheroSecciones == NULL) {
+	        perror("Error al abrir el archivo");
+	        return;
+	    }
+
+	char line[256];
+	int i = 0;
+
+
+	while (fgets(line, sizeof(line), ficheroDepartamentos)) {
+		 char *token = strtok(line, ";");
+		 departamentos[i].idDepartamento = atoi(token);
+
+		 token = strtok(NULL, ";");
+		 strcpy(departamentos[i].nombreDepartamento, token);
+
+		 token = strtok(NULL, ";");
+		 departamentos[i].NSSJefe = atoi(token);
+
+		 i++;
+	}
+
+		fclose(ficheroDepartamentos);
+
+		i = 0;
+
+	while (fgets(line, sizeof(line), ficheroEmpleados)) {
+		char *token = strtok(line, ";");
+		empleados[i].NSS = atoi(token);
+
+		token = strtok(NULL, ";");
+		strcpy(empleados[i].nombreEmpleado, token);
+
+		token = strtok(NULL, ";");
+		strcpy(empleados[i].contrasena, token);
+
+		token = strtok(NULL, ";");
+		empleados[i].codSeccion = atoi(token);
+
+		token = strtok(NULL, ";");
+		empleados[i].idDepartamento = atoi(token);
+
+		i++;
+		}
+
+		fclose(ficheroEmpleados);
+
+		i = 0;
+
+	while (fgets(line, sizeof(line), ficheroProductos)) {
+		char *token = strtok(line, ";");
+		productos[i].idProd = atoi(token);
+
+		token = strtok(NULL, ";");
+		strcpy(productos[i].nombreProd, token);
+
+		token = strtok(NULL, ";");
+		productos[i].precio = atof(token);
+
+		token = strtok(NULL, ";");
+		productos[i].codSeccion = atoi(token);
+
+		token = strtok(NULL, ";");
+		productos[i].codProveedor = atoi(token);
+
+		i++;
+		}
+
+		fclose(ficheroProductos);
+
+		i = 0;
+
+	while (fgets(line, sizeof(line), ficheroProveedores)) {
+		char *token = strtok(line, ";");
+		proveedores[i].codProveedor = atoi(token);
+
+		token = strtok(NULL, ";");
+		strcpy(proveedores[i].nombreProveedor, token);
+
+		token = strtok(NULL, ";");
+		proveedores[i].codPostal = atoi(token);
+
+		token = strtok(NULL, ";");
+		strcpy(proveedores[i].contrasena, token);
+
+		i++;
+		}
+
+		fclose(ficheroProveedores);
+
+		i = 0;
+
+	while (fgets(line, sizeof(line), ficheroSecciones)) {
+		char *token = strtok(line, ";");
+		secciones[i].codSeccion = atoi(token);
+
+		token = strtok(NULL, ";");
+		strcpy(secciones[i].nombreSeccion, token);
+
+		i++;
+		}
+
+		fclose(ficheroSecciones);
+
+
+}
+
 
 
 

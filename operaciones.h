@@ -5,7 +5,7 @@
 
 typedef struct {
 	int idProd;
-	char * nombreProd;
+	char nombreProd[30];
 	float precio;
 	int codSeccion;
 	int codProveedor;
@@ -13,26 +13,26 @@ typedef struct {
 
 typedef struct {
 	int codProveedor;
-	char * nombreProveedor;
+	char nombreProveedor[30];
 	int codPostal;
-	char * contrasena;
+	char contrasena[30];
 }Proveedor;
 
 typedef struct {
 	int codSeccion;
-	char * nombreSeccion;
+	char nombreSeccion[30];
 }Seccion;
 
 typedef struct {
 	int idDepartamento;
-	char * nombreDepartamento;
+	char nombreDepartamento[30];
 	int NSSJefe;
 }Departamento;
 
 typedef struct {
 	int NSS;
-	char * nombreEmpleado;
-	char * contrasena;
+	char nombreEmpleado[30];
+	char contrasena[30];
 	int codSeccion;
 	int idDepartamento;
 }Empleado;
@@ -42,5 +42,12 @@ void crearTablas(sqlite3 *db);
 void insertarProductos(sqlite3 * db);
 
 int mostrarProductos(sqlite3 *db, Producto **productos);
+
+int compararPorPrecio(const void *a, const void *b);
+
+void ordenarEstante(Producto *productos, int num_productos, Producto ***productosEstante);
+
+void leerFicheros (Departamento departamentos[], Empleado empleados[], Producto productos[], Proveedor proveedores[], Seccion secciones[]);
+
 
 #endif

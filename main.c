@@ -19,13 +19,57 @@ int main (void){
 	insertarProductos(db);
 
 	Producto *productos = NULL;
-	//int num_productos = mostrarProductos(db, &productos);
+	int num_productos = mostrarProductos(db, &productos);
 
-	//for (int i = 0; i < num_productos; ++i) {
-		//printf("ID: %d, Nombre: %s, Precio: %.2f, Proveedor: %d, Seccion: %d\n", productos[i].idProd, productos[i].nombreProd, productos[i].precio, productos[i].codProveedor, productos[i].codSeccion);
-	//}
+	Producto **productosEstante;
+
+
+	char opcion;
+
+		do {
+			printf("Bienvenido al gestor de productos\n");
+		    printf("1. Mostrar productos\n");
+		    printf("2. Añadir productos\n");
+		    printf("3. Eliminar producto\n");
+		    printf("4. Ordenar productos\n");
+		    printf("5. Ver estanteria\n");
+		    printf("Pulsar 'q' para salir\n");
+		    printf("Seleccione una opción: ");
+		    fflush(stdout);
+		    scanf(" %c", &opcion);
+
+		    if(opcion == '1') {
+		    	for (int i = 0; i < num_productos; ++i) {
+		    		printf("ID: %d, Nombre: %s, Precio: %.2f, Proveedor: %d, Seccion: %d\n", productos[i].idProd, productos[i].nombreProd, productos[i].precio, productos[i].codProveedor, productos[i].codSeccion);
+		        }
+		    }
+		    else if(opcion == '2') {
+
+		    }
+		    else if(opcion == '3') {
+
+		    }
+		    else if(opcion == '4') {
+		    	qsort(productos, num_productos, sizeof(Producto), compararPorPrecio);
+		    }
+		    else if(opcion == '5') {
+		    	ordenarEstante(productos, num_productos, &productosEstante);
+
+		    }
+
+		    } while (opcion != 'q');
 
 	sqlite3_close(db);
+
+	Departamento departamentos[100];
+		Empleado empleados[100];
+		Producto productos2[100];
+		Proveedor proveedores[100];
+		Seccion secciones[100];
+
+
+		leerFicheros(departamentos, empleados, productos2, proveedores, secciones);
+
 
 }
 
