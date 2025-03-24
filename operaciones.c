@@ -73,7 +73,7 @@ void insertarProductos(sqlite3 * db) {
 	int ejecutar = sqlite3_exec(db, sql, 0, 0, &mensajeError);
 
 	if (ejecutar != SQLITE_OK) {
-	    printf("Error al insertar productos: %s\n", mensajeError);
+	    printf("Error al insertar productos/Productos ya insertados: %s\n", mensajeError);
 	    sqlite3_free(mensajeError);
 	}
 	else {
@@ -119,5 +119,16 @@ int mostrarProductos(sqlite3 *db, Producto **productos) {
 	return contador;
 }
 
+int compararPorPrecio(const void *a, const void *b) {
+	Producto *p1 = (Producto *)a;
+	Producto *p2 = (Producto *)b;
 
+	if (p1->precio < p2->precio) return 1;
+	if (p1->precio > p2->precio) return -1;
+	return 0;
+}
+
+void ordenarEstante(Producto *productos, int num_productos, Producto ***productosEstante) {
+
+}
 
