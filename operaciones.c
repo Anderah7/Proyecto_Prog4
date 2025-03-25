@@ -68,7 +68,7 @@ void insertarDepartamentos(sqlite3 * db, Departamento departamentos[]) {
 		            printf("Error al insertar datos: %s\n", mensajeError);
 		            sqlite3_free(mensajeError);
 		        } else {
-		            printf("Registro insertado: %i, '%s', %i\n", departamentos[i].idDepartamento, departamentos[i].nombreDepartamento, departamentos[i].NSSJefe);
+		            printf("Registro insertado: %i, %s, %i\n", departamentos[i].idDepartamento, departamentos[i].nombreDepartamento, departamentos[i].NSSJefe);
 		        }
 	}
 }
@@ -86,7 +86,7 @@ void insertarEmpleados(sqlite3 * db, Empleado empleados[]) {
 		            printf("Error al insertar datos: %s\n", mensajeError);
 		            sqlite3_free(mensajeError);
 		        } else {
-		            printf("Registro insertado: %i, '%s', '%s', %i, %i\n", empleados[i].NSS, empleados[i].nombreEmpleado, empleados[i].contrasena, empleados[i].idDepartamento, empleados[i].codSeccion);
+		            printf("Registro insertado: %i, %s, %s, %i, %i\n", empleados[i].NSS, empleados[i].nombreEmpleado, empleados[i].contrasena, empleados[i].idDepartamento, empleados[i].codSeccion);
 		        }
 	}
 }
@@ -105,7 +105,7 @@ void insertarProductos(sqlite3 * db, Producto productos[]) {
 		            printf("Error al insertar datos: %s\n", mensajeError);
 		            sqlite3_free(mensajeError);
 		        } else {
-		            printf("Registro insertado: %i, '%s', %f, %i, %i\n", productos[i].idProd, productos[i].nombreProd, productos[i].precio, productos[i].codProveedor, productos[i].codSeccion);
+		            printf("Registro insertado: %i, %s, %f, %i, %i\n", productos[i].idProd, productos[i].nombreProd, productos[i].precio, productos[i].codProveedor, productos[i].codSeccion);
 		        }
 	}
 }
@@ -124,7 +124,7 @@ void insertarProveedores(sqlite3 * db, Proveedor proveedores[]) {
 		            printf("Error al insertar datos: %s\n", mensajeError);
 		            sqlite3_free(mensajeError);
 		        } else {
-		            printf("Registro insertado: %i, '%s', %i, '%s'\n", proveedores[i].codProveedor, proveedores[i].nombreProveedor, proveedores[i].codPostal, proveedores[i].contrasena);
+		            printf("Registro insertado: %i, %s, %i, %s\n", proveedores[i].codProveedor, proveedores[i].nombreProveedor, proveedores[i].codPostal, proveedores[i].contrasena);
 		        }
 	}
 }
@@ -143,7 +143,7 @@ void insertarSecciones(sqlite3 * db, Seccion secciones[]) {
 		            printf("Error al insertar datos: %s\n", mensajeError);
 		            sqlite3_free(mensajeError);
 		        } else {
-		            printf("Registro insertado: %i, '%s'\n", secciones[i].codSeccion, secciones[i].nombreSeccion);
+		            printf("Registro insertado: %i, %s\n", secciones[i].codSeccion, secciones[i].nombreSeccion);
 		        }
 	}
 }
