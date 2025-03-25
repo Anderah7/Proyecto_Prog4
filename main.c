@@ -24,6 +24,7 @@ int main (void){
 	    printf("Conectado a la bd\n");
 	}
 
+	dropTables(db);
 	crearTablas(db);
 
 	insertarDepartamentos(db, departamentos);

@@ -42,8 +42,10 @@ void crearTablas(sqlite3 *db);
 void insertarDepartamentos(sqlite3 * db, Departamento departamentos[]);
 void insertarEmpleados(sqlite3 * db, Empleado empleados[]);
 void insertarProductos(sqlite3 * db, Producto productos[]);
-void insertarProveedore(sqlite3 * db, Proveedor proveedores[]);
+void insertarProveedores(sqlite3 * db, Proveedor proveedores[]);
 void insertarSecciones(sqlite3 * db, Seccion secciones[]);
+
+void dropTables(sqlite3 *db);
 
 int mostrarProductos(sqlite3 *db, Producto **productos);
 

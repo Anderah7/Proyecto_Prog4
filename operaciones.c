@@ -384,6 +384,22 @@ void leerFicheros (Departamento departamentos[], Empleado empleados[], Producto 
 		fclose(ficheroSecciones);
 }
 
+void dropTables(sqlite3 * db) {
+    char *errMsg = 0;
+    char *sql = "DROP TABLE IF EXISTS producto; "
+    			"DROP TABLE IF EXISTS departamento; "
+                "DROP TABLE IF EXISTS proveedor; "
+    			"DROP TABLE IF EXISTS empleado; "
+                "DROP TABLE IF EXISTS seccion; ";
+
+    if (sqlite3_exec(db, sql, 0, 0, &errMsg) != SQLITE_OK) {
+        printf("Error al borrar tablas: %s\n", errMsg);
+        sqlite3_free(errMsg);
+    } else {
+        printf("Tablas eliminadas correctamente.\n");
+    }
+}
+
 
 
 
