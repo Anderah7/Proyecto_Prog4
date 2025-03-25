@@ -11,6 +11,7 @@ int main (void){
 	Proveedor proveedores[100];
 	Seccion secciones[100];
 
+
 	leerFicheros(departamentos, empleados, productos, proveedores, secciones);
 
 	sqlite3 * db;
@@ -25,17 +26,15 @@ int main (void){
 
 	crearTablas(db);
 
-	insertarProductos(db, productos);
 	insertarDepartamentos(db, departamentos);
 	insertarEmpleados(db, empleados);
 	insertarProductos(db, productos);
 	insertarProveedores(db, proveedores);
 	insertarSecciones(db, secciones);
 
-
+	//Array de productos
 	//Producto *productos = NULL;
-	int num_productos = mostrarProductos(db, productos);
-
+	int num_productos = mostrarProductos(db, &productos);
 
 	//Para la funcion ordenar
 	Producto **productosEstante;
