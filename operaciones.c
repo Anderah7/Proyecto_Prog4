@@ -32,6 +32,7 @@ void crearTablas(sqlite3 *db) {
 			"id_Departamento INT(5) PRIMARY KEY, "
 			"nombre VARCHAR(50)); "
 
+
 			"CREATE TABLE IF NOT EXISTS empleado("
 			"NSS_Empleado INT(11) PRIMARY KEY, "
 			"nombre VARCHAR(30), "
@@ -54,30 +55,96 @@ void crearTablas(sqlite3 *db) {
 
 }
 
-void insertarProductos(sqlite3 * db) {
+void insertarDepartamentos(sqlite3 * db, Departamento departamentos[]) {
 	char * mensajeError = 0;
+	char sql[256];
 
-	const char *sql =
-	        "INSERT INTO producto (id_Producto, nombre, precio, id_Proveedor, cod_Seccion) VALUES "
-	        "(1, 'Huevos', 2.99, 1, 1), "
-	        "(2, 'Leche', 1.50, 2, 1), "
-	        "(3, 'Queso', 4.55, 3, 1), "
-	        "(4, 'Filete de ternera', 5.99, 1, 1), "
-	        "(5, 'Pechugas de pollo', 4.75, 2, 1), "
-	        "(6, 'Alitas de pollo', 8.99, 4, 2), "
-	        "(7, 'Manzana', 0.70, 3, 2), "
-	        "(8, 'Pera', 0.60, 5, 2), "
-	        "(9, 'Arroz blanco', 1.15, 4, 2), "
-	        "(10, 'Macarrones', 1.70, 1, 2);";
+	for (int i = 0; i < 5; i++) {
+		sprintf(sql, "INSERT INTO departamento (id_Departamento, nombre) VALUES (%i, '%s');",
+			                departamentos[i].idDepartamento, departamentos[i].nombreDepartamento); //aqui falta el NSS del jefe (que no esta en la base de datos)
 
-	int ejecutar = sqlite3_exec(db, sql, 0, 0, &mensajeError);
 
-	if (ejecutar != SQLITE_OK) {
-	    printf("Error al insertar productos/Productos ya insertados: %s\n", mensajeError);
-	    sqlite3_free(mensajeError);
+	 if (sqlite3_exec(db, sql, 0, 0, &mensajeError) != SQLITE_OK) {
+		            printf("Error al insertar datos: %s\n", mensajeError);
+		            sqlite3_free(mensajeError);
+		        } else {
+		            printf("Registro insertado: %i, '%s', %i\n", departamentos[i].idDepartamento, departamentos[i].nombreDepartamento, departamentos[i].NSSJefe);
+		        }
 	}
-	else {
-		printf("Productos insertados correctamente.\n");
+}
+
+void insertarEmpleados(sqlite3 * db, Empleado empleados[]) {
+	char * mensajeError = 0;
+	char sql[256];
+
+	for (int i = 0; i < 5; i++) {
+		sprintf(sql, "INSERT INTO empleado (NSS_Empleado, nombre, contrasena, id_Departamento, id_Seccion) VALUES (%i, '%s', '%s', %i, %i);",
+			                empleados[i].NSS, empleados[i].nombreEmpleado, empleados[i].contrasena, empleados[i].idDepartamento, empleados[i].codSeccion);
+
+
+	 if (sqlite3_exec(db, sql, 0, 0, &mensajeError) != SQLITE_OK) {
+		            printf("Error al insertar datos: %s\n", mensajeError);
+		            sqlite3_free(mensajeError);
+		        } else {
+		            printf("Registro insertado: %i, '%s', '%s', %i, %i\n", empleados[i].NSS, empleados[i].nombreEmpleado, empleados[i].contrasena, empleados[i].idDepartamento, empleados[i].codSeccion);
+		        }
+	}
+}
+
+
+void insertarProductos(sqlite3 * db, Producto productos[]) {
+	char * mensajeError = 0;
+	char sql[256];
+
+	for (int i = 0; i < 5; i++) {
+		sprintf(sql, "INSERT INTO producto (id_Producto, nombre, precio, id_Proveedor, cod_Seccion) VALUES (%i, '%s', %f, %i, %i);",
+			                productos[i].idProd, productos[i].nombreProd, productos[i].precio, productos[i].codProveedor, productos[i].codSeccion);
+
+
+	 if (sqlite3_exec(db, sql, 0, 0, &mensajeError) != SQLITE_OK) {
+		            printf("Error al insertar datos: %s\n", mensajeError);
+		            sqlite3_free(mensajeError);
+		        } else {
+		            printf("Registro insertado: %i, '%s', %f, %i, %i\n", productos[i].idProd, productos[i].nombreProd, productos[i].precio, productos[i].codProveedor, productos[i].codSeccion);
+		        }
+	}
+}
+
+
+void insertarProveedores(sqlite3 * db, Proveedor proveedores[]) {
+	char * mensajeError = 0;
+	char sql[256];
+
+	for (int i = 0; i < 5; i++) {
+		sprintf(sql, "INSERT INTO proveedor (id_Proveedor, nombre, codigo_Postal, contrasena) VALUES (%i, '%s', %i, '%s');",
+			                proveedores[i].codProveedor, proveedores[i].nombreProveedor, proveedores[i].codPostal, proveedores[i].contrasena);
+
+
+	 if (sqlite3_exec(db, sql, 0, 0, &mensajeError) != SQLITE_OK) {
+		            printf("Error al insertar datos: %s\n", mensajeError);
+		            sqlite3_free(mensajeError);
+		        } else {
+		            printf("Registro insertado: %i, '%s', %i, '%s'\n", proveedores[i].codProveedor, proveedores[i].nombreProveedor, proveedores[i].codPostal, proveedores[i].contrasena);
+		        }
+	}
+}
+
+
+void insertarSecciones(sqlite3 * db, Seccion secciones[]) {
+	char * mensajeError = 0;
+	char sql[256];
+
+	for (int i = 0; i < 5; i++) {
+		sprintf(sql, "INSERT INTO producto (cod_seccion, nombre) VALUES (%i, '%s');",
+			                secciones[i].codSeccion, secciones[i].nombreSeccion);
+
+
+	 if (sqlite3_exec(db, sql, 0, 0, &mensajeError) != SQLITE_OK) {
+		            printf("Error al insertar datos: %s\n", mensajeError);
+		            sqlite3_free(mensajeError);
+		        } else {
+		            printf("Registro insertado: %i, '%s'\n", secciones[i].codSeccion, secciones[i].nombreSeccion);
+		        }
 	}
 }
 
@@ -136,7 +203,7 @@ void ordenarEstante(Producto *productos, int num_productos, Producto ***producto
 
 
 void leerFicheros (Departamento departamentos[], Empleado empleados[], Producto productos[], Proveedor proveedores[], Seccion secciones[]){
-	FILE *ficheroDepartamentos = fopen("datosIniciales/departamento.csv", "r");
+	FILE *ficheroDepartamentos = fopen("datosIniciales/departamentos.csv", "r");
 	FILE *ficheroEmpleados = fopen("datosIniciales/empleados.csv", "r");
 	FILE *ficheroProductos = fopen("datosIniciales/productos.csv", "r");
 	FILE *ficheroProveedores = fopen("datosIniciales/proveedores.csv", "r");
@@ -246,9 +313,11 @@ void leerFicheros (Departamento departamentos[], Empleado empleados[], Producto 
 		}
 
 		fclose(ficheroSecciones);
-
-
 }
+
+
+
+
 
 
 

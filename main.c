@@ -4,6 +4,15 @@
 #include <stdlib.h>
 
 int main (void){
+
+	Departamento departamentos[100];
+	Empleado empleados[100];
+	Producto productos[100];
+	Proveedor proveedores[100];
+	Seccion secciones[100];
+
+	leerFicheros(departamentos, empleados, productos, proveedores, secciones);
+
 	sqlite3 * db;
 	int abrir = sqlite3_open("adate.db", &db);
 
@@ -16,10 +25,15 @@ int main (void){
 
 	crearTablas(db);
 
-	insertarProductos(db);
+	insertarProductos(db, productos);
+	insertarDepartamentos(db, departamentos);
+	insertarEmpleados(db, empleados);
+	insertarProductos(db, productos);
+	insertarProveedores(db, proveedores);
+	insertarSecciones(db, secciones);
 
-	Producto *productos = NULL;
-	int num_productos = mostrarProductos(db, &productos);
+	//Producto *productos = NULL;
+	int num_productos = mostrarProductos(db, productos);
 
 	Producto **productosEstante;
 
@@ -61,14 +75,7 @@ int main (void){
 
 	sqlite3_close(db);
 
-	Departamento departamentos[100];
-		Empleado empleados[100];
-		Producto productos2[100];
-		Proveedor proveedores[100];
-		Seccion secciones[100];
 
-
-		leerFicheros(departamentos, empleados, productos2, proveedores, secciones);
 
 
 }

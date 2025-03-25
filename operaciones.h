@@ -39,7 +39,11 @@ typedef struct {
 
 void crearTablas(sqlite3 *db);
 
-void insertarProductos(sqlite3 * db);
+void insertarDepartamentos(sqlite3 * db, Departamento departamentos[]);
+void insertarEmpleados(sqlite3 * db, Empleado empleados[]);
+void insertarProductos(sqlite3 * db, Producto productos[]);
+void insertarProveedores(sqlite3 * db, Proveedor proveedores[]);
+void insertarSecciones(sqlite3 * db, Seccion secciones[]);
 
 int mostrarProductos(sqlite3 *db, Producto **productos);
 
@@ -48,5 +52,6 @@ int compararPorPrecio(const void *a, const void *b);
 void ordenarEstante(Producto *productos, int num_productos, Producto ***productosEstante);
 
 void leerFicheros (Departamento departamentos[], Empleado empleados[], Producto productos[], Proveedor proveedores[], Seccion secciones[]);
+
 
 #endif
