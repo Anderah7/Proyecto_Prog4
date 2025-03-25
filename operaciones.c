@@ -129,11 +129,80 @@ int compararPorPrecio(const void *a, const void *b) {
 	return 0;
 }
 
-void ordenarEstante(Producto *productos, int num_productos, Producto ***productosEstante) {
+void ordenarEstante(Producto *productos, int num_productos, Producto ***productosEstante, int * num_secciones, int ** seccionesEstante) {
 
+	*num_secciones = contarSecciones(productos, num_productos, seccionesEstante);
+
+	*productosEstante = malloc((*num_secciones) * sizeof(Producto *));
+	int *contadorSeccion = calloc((*num_secciones), sizeof(int));
+
+	for (int i = 0; i < num_productos; i++) {
+		for (int j = 0; j < *num_secciones; j++) {
+			if (productos[i].codSeccion == (*seccionesEstante)[j]) {
+				contadorSeccion[j]++;
+	            break;
+	        }
+		}
+	}
+
+	for (int i = 0; i < *num_secciones; i++) {
+		(*productosEstante)[i] = malloc(contadorSeccion[i] * sizeof(Producto));
+		contadorSeccion[i] = 0;
+	}
+
+	for (int i = 0; i < num_productos; i++) {
+		for (int j = 0; j < *num_secciones; j++) {
+			if (productos[i].codSeccion == (*seccionesEstante)[j]) {
+				(*productosEstante)[j][contadorSeccion[j]++] = productos[i];
+				break;
+			}
+		}
+	}
+
+	free(contadorSeccion);
 }
 
+int contarSecciones(Producto *productos, int num_productos, int **seccionesEstante) {
+	int *tempSecciones = malloc(num_productos * sizeof(int));
+	int num_secciones = 0;
 
+	for (int i = 0; i < num_productos; i++) {
+		int existe = 0;
+	    for (int j = 0; j < num_secciones; j++) {
+	    	if (tempSecciones[j] == productos[i].codSeccion) {
+	    		existe = 1;
+	            break;
+	        }
+	    }
+	    if (!existe) {
+	        tempSecciones[num_secciones++] = productos[i].codSeccion;
+	    }
+	}
+
+	*seccionesEstante = malloc(num_secciones * sizeof(int));
+	memcpy(*seccionesEstante, tempSecciones, num_secciones * sizeof(int));
+	free(tempSecciones);
+
+	return num_secciones;
+}
+
+void mostrarProductosEstante(Producto **productosEstante, int *seccionesEstante, int num_secciones) {
+	for(int i = 0; i < num_secciones; i++) {
+		printf("Seccion: %d", seccionesEstante[i]);
+		int j = 0;
+		while (productosEstante[i][j].idProd != 0) {
+			printf("  ID: %d, Nombre: %s, Precio: %.2f\n", productosEstante[i][j].idProd, productosEstante[i][j].nombreProd, productosEstante[i][j].precio);
+			j++;
+		}
+	}
+}
+
+void liberarMemoria(Producto **productosEstante, int num_secciones) {
+	for(int i = 0; i < num_secciones; i++) {
+		free(productosEstante[i]);
+	}
+	free(productosEstante);
+}
 
 void leerFicheros (Departamento departamentos[], Empleado empleados[], Producto productos[], Proveedor proveedores[], Seccion secciones[]){
 	FILE *ficheroDepartamentos = fopen("datosIniciales/departamento.csv", "r");
