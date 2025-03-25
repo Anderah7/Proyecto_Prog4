@@ -32,10 +32,15 @@ int main (void){
 	insertarProveedores(db, proveedores);
 	insertarSecciones(db, secciones);
 
+
 	//Producto *productos = NULL;
 	int num_productos = mostrarProductos(db, productos);
 
+
+	//Para la funcion ordenar
 	Producto **productosEstante;
+	int num_secciones;
+	int *seccionesEstante;
 
 
 	char opcion;
@@ -67,7 +72,10 @@ int main (void){
 		    	qsort(productos, num_productos, sizeof(Producto), compararPorPrecio);
 		    }
 		    else if(opcion == '5') {
-		    	ordenarEstante(productos, num_productos, &productosEstante);
+		    	ordenarEstante(productos, num_productos, &productosEstante, &num_secciones, &seccionesEstante);
+		    	mostrarProductosEstante(productosEstante, seccionesEstante, num_secciones);
+		    	liberarMemoria(productosEstante, num_secciones);
+		    	free(seccionesEstante);
 
 		    }
 
