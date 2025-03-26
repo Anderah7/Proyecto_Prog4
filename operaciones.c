@@ -272,11 +272,11 @@ void liberarMemoria(Producto **productosEstante, int num_secciones) {
 }
 
 void leerFicheros (Departamento departamentos[], Empleado empleados[], Producto productos[], Proveedor proveedores[], Seccion secciones[], int *contDepar, int *contEmpl, int *contProd, int *contProv, int *contSec){
-	FILE *ficheroDepartamentos = fopen("datosIniciales/departamentos.csv", "r");
-	FILE *ficheroEmpleados = fopen("datosIniciales/empleados.csv", "r");
-	FILE *ficheroProductos = fopen("datosIniciales/productos.csv", "r");
-	FILE *ficheroProveedores = fopen("datosIniciales/proveedores.csv", "r");
-	FILE *ficheroSecciones = fopen("datosIniciales/secciones.csv", "r");
+	FILE *ficheroDepartamentos = fopen("database/datosIniciales/departamentos.csv", "r");
+	FILE *ficheroEmpleados = fopen("database/datosIniciales/empleados.csv", "r");
+	FILE *ficheroProductos = fopen("database/datosIniciales/productos.csv", "r");
+	FILE *ficheroProveedores = fopen("database/datosIniciales/proveedores.csv", "r");
+	FILE *ficheroSecciones = fopen("database/datosIniciales/secciones.csv", "r");
 
 
 	if (ficheroDepartamentos == NULL || ficheroEmpleados == NULL || ficheroProductos == NULL || ficheroProveedores == NULL || ficheroSecciones == NULL) {
