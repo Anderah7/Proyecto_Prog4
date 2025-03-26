@@ -85,7 +85,7 @@ void mostrarProductosEstante(Producto **productosEstante, int *seccionesEstante,
 	}
 }
 
-void anadirProducto (sqlite3 * db, int *contProd, char nomProd[], float precio, int codSec, int codDep){
+void anadirProducto (sqlite3 * db, int *contProd, char nomProd[], float precio, int codSec, int codDep){ // esto solo funciona si la base de datos se reinicia cada vez que se inicia el programa
 	char * mensajeError = 0;
 	char sql[256];
 	(*contProd)++; // esto es para que la id del producto sea la iguiente a la anterior
