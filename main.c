@@ -11,8 +11,13 @@ int main (void){
 	Proveedor proveedores[100];
 	Seccion secciones[100];
 
+	int contDepar = 0;
+	int contEmpl = 0;
+	int contProd = 0;
+	int contProv = 0;
+	int contSec = 0;
 
-	leerFicheros(departamentos, empleados, productos, proveedores, secciones);
+	leerFicheros(departamentos, empleados, productos, proveedores, secciones, &contDepar, &contEmpl, &contProd, &contProv, &contSec);
 
 	sqlite3 * db;
 	int abrir = sqlite3_open("adate.db", &db);
@@ -27,11 +32,11 @@ int main (void){
 	dropTables(db);
 	crearTablas(db);
 
-	insertarDepartamentos(db, departamentos);
-	insertarEmpleados(db, empleados);
-	insertarProductos(db, productos);
-	insertarProveedores(db, proveedores);
-	insertarSecciones(db, secciones);
+	insertarDepartamentos(db, departamentos, contDepar);
+	insertarEmpleados(db, empleados, contEmpl);
+	insertarProductos(db, productos, contProd);
+	insertarProveedores(db, proveedores, contProv);
+	insertarSecciones(db, secciones, contSec);
 
 	//Array de productos
 	//Producto *productos = NULL;
@@ -70,7 +75,7 @@ int main (void){
 		    }
 		    else if(opcion == '4') {
 		    	qsort(productos, num_productos, sizeof(Producto), compararPorPrecio);
-		    }
+		   }
 		    else if(opcion == '5') {
 		    	ordenarEstante(productos, num_productos, &productosEstante, &num_secciones, &seccionesEstante);
 		    	mostrarProductosEstante(productosEstante, seccionesEstante, num_secciones);

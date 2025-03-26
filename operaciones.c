@@ -55,11 +55,11 @@ void crearTablas(sqlite3 *db) {
 
 }
 
-void insertarDepartamentos(sqlite3 * db, Departamento departamentos[]) {
+void insertarDepartamentos(sqlite3 * db, Departamento departamentos[], int contador) {
 	char * mensajeError = 0;
 	char sql[256];
 
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < contador; i++) {
 		sprintf(sql, "INSERT INTO departamento (id_Departamento, nombre) VALUES (%i, '%s');",
 			                departamentos[i].idDepartamento, departamentos[i].nombreDepartamento); //aqui falta el NSS del jefe (que no esta en la base de datos)
 
@@ -73,11 +73,11 @@ void insertarDepartamentos(sqlite3 * db, Departamento departamentos[]) {
 	}
 }
 
-void insertarEmpleados(sqlite3 * db, Empleado empleados[]) {
+void insertarEmpleados(sqlite3 * db, Empleado empleados[], int contador) {
 	char * mensajeError = 0;
 	char sql[256];
 
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < contador; i++) {
 		sprintf(sql, "INSERT INTO empleado (NSS_Empleado, nombre, contrasena, id_Departamento, id_Seccion) VALUES (%i, '%s', '%s', %i, %i);",
 			                empleados[i].NSS, empleados[i].nombreEmpleado, empleados[i].contrasena, empleados[i].idDepartamento, empleados[i].codSeccion);
 
@@ -92,11 +92,11 @@ void insertarEmpleados(sqlite3 * db, Empleado empleados[]) {
 }
 
 
-void insertarProductos(sqlite3 * db, Producto productos[]) {
+void insertarProductos(sqlite3 * db, Producto productos[], int contador) {
 	char * mensajeError = 0;
 	char sql[256];
 
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < contador; i++) {
 		sprintf(sql, "INSERT INTO producto (id_Producto, nombre, precio, id_Proveedor, cod_Seccion) VALUES (%i, '%s', %f, %i, %i);",
 			                productos[i].idProd, productos[i].nombreProd, productos[i].precio, productos[i].codProveedor, productos[i].codSeccion);
 
@@ -105,17 +105,17 @@ void insertarProductos(sqlite3 * db, Producto productos[]) {
 		            printf("Error al insertar datos: %s\n", mensajeError);
 		            sqlite3_free(mensajeError);
 		        } else {
-		            printf("Registro insertado: %i, %s, %f, %i, %i\n", productos[i].idProd, productos[i].nombreProd, productos[i].precio, productos[i].codProveedor, productos[i].codSeccion);
+		            printf("Registro insertado: %i, %s, %.2f, %i, %i\n", productos[i].idProd, productos[i].nombreProd, productos[i].precio, productos[i].codProveedor, productos[i].codSeccion);
 		        }
 	}
 }
 
 
-void insertarProveedores(sqlite3 * db, Proveedor proveedores[]) {
+void insertarProveedores(sqlite3 * db, Proveedor proveedores[], int contador) {
 	char * mensajeError = 0;
 	char sql[256];
 
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < contador; i++) {
 		sprintf(sql, "INSERT INTO proveedor (id_Proveedor, nombre, codigo_Postal, contrasena) VALUES (%i, '%s', %i, '%s');",
 			                proveedores[i].codProveedor, proveedores[i].nombreProveedor, proveedores[i].codPostal, proveedores[i].contrasena);
 
@@ -130,11 +130,11 @@ void insertarProveedores(sqlite3 * db, Proveedor proveedores[]) {
 }
 
 
-void insertarSecciones(sqlite3 * db, Seccion secciones[]) {
+void insertarSecciones(sqlite3 * db, Seccion secciones[], int contador) {
 	char * mensajeError = 0;
 	char sql[256];
 
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < contador; i++) {
 		sprintf(sql, "INSERT INTO producto (cod_seccion, nombre) VALUES (%i, '%s');",
 			                secciones[i].codSeccion, secciones[i].nombreSeccion);
 
@@ -271,7 +271,7 @@ void liberarMemoria(Producto **productosEstante, int num_secciones) {
 	free(productosEstante);
 }
 
-void leerFicheros (Departamento departamentos[], Empleado empleados[], Producto productos[], Proveedor proveedores[], Seccion secciones[]){
+void leerFicheros (Departamento departamentos[], Empleado empleados[], Producto productos[], Proveedor proveedores[], Seccion secciones[], int *contDepar, int *contEmpl, int *contProd, int *contProv, int *contSec){
 	FILE *ficheroDepartamentos = fopen("datosIniciales/departamentos.csv", "r");
 	FILE *ficheroEmpleados = fopen("datosIniciales/empleados.csv", "r");
 	FILE *ficheroProductos = fopen("datosIniciales/productos.csv", "r");
@@ -285,100 +285,95 @@ void leerFicheros (Departamento departamentos[], Empleado empleados[], Producto 
 	    }
 
 	char line[256];
-	int i = 0;
 
 
 	while (fgets(line, sizeof(line), ficheroDepartamentos)) {
-		 char *token = strtok(line, ";");
-		 departamentos[i].idDepartamento = atoi(token);
+		 char *token = strtok(line, ",");
+		 departamentos[*contDepar].idDepartamento = atoi(token);
 
-		 token = strtok(NULL, ";");
-		 strcpy(departamentos[i].nombreDepartamento, token);
+		 token = strtok(NULL, ",");
+		 strcpy(departamentos[*contDepar].nombreDepartamento, token);
 
-		 token = strtok(NULL, ";");
-		 departamentos[i].NSSJefe = atoi(token);
+		 token = strtok(NULL, ",");
+		 departamentos[*contDepar].NSSJefe = atoi(token);
 
-		 i++;
+		 *contDepar += 1;
 	}
 
 		fclose(ficheroDepartamentos);
 
-		i = 0;
 
 	while (fgets(line, sizeof(line), ficheroEmpleados)) {
-		char *token = strtok(line, ";");
-		empleados[i].NSS = atoi(token);
+		char *token = strtok(line, ",");
+		empleados[*contEmpl].NSS = atoi(token);
 
-		token = strtok(NULL, ";");
-		strcpy(empleados[i].nombreEmpleado, token);
+		token = strtok(NULL, ",");
+		strcpy(empleados[*contEmpl].nombreEmpleado, token);
 
-		token = strtok(NULL, ";");
-		strcpy(empleados[i].contrasena, token);
+		token = strtok(NULL, ",");
+		strcpy(empleados[*contEmpl].contrasena, token);
 
-		token = strtok(NULL, ";");
-		empleados[i].codSeccion = atoi(token);
+		token = strtok(NULL, ",");
+		empleados[*contEmpl].codSeccion = atoi(token);
 
-		token = strtok(NULL, ";");
-		empleados[i].idDepartamento = atoi(token);
+		token = strtok(NULL, ",");
+		empleados[*contEmpl].idDepartamento = atoi(token);
 
-		i++;
+		*contEmpl += 1;
 		}
 
 		fclose(ficheroEmpleados);
 
-		i = 0;
 
 	while (fgets(line, sizeof(line), ficheroProductos)) {
-		char *token = strtok(line, ";");
-		productos[i].idProd = atoi(token);
+		char *token = strtok(line, ",");
+		productos[*contProd].idProd = atoi(token);
 
-		token = strtok(NULL, ";");
-		strcpy(productos[i].nombreProd, token);
+		token = strtok(NULL, ",");
+		strcpy(productos[*contProd].nombreProd, token);
 
-		token = strtok(NULL, ";");
-		productos[i].precio = atof(token);
+		token = strtok(NULL, ",");
+		productos[*contProd].precio = atof(token);
 
-		token = strtok(NULL, ";");
-		productos[i].codSeccion = atoi(token);
+		token = strtok(NULL, ",");
+		productos[*contProd].codSeccion = atoi(token);
 
-		token = strtok(NULL, ";");
-		productos[i].codProveedor = atoi(token);
+		token = strtok(NULL, ",");
+		productos[*contProd].codProveedor = atoi(token);
 
-		i++;
+		*contProd += 1;
 		}
 
 		fclose(ficheroProductos);
 
-		i = 0;
 
 	while (fgets(line, sizeof(line), ficheroProveedores)) {
-		char *token = strtok(line, ";");
-		proveedores[i].codProveedor = atoi(token);
+		char *token = strtok(line, ",");
+		proveedores[*contProv].codProveedor = atoi(token);
 
-		token = strtok(NULL, ";");
-		strcpy(proveedores[i].nombreProveedor, token);
+		token = strtok(NULL, ",");
+		strcpy(proveedores[*contProv].nombreProveedor, token);
 
-		token = strtok(NULL, ";");
-		proveedores[i].codPostal = atoi(token);
+		token = strtok(NULL, ",");
+		proveedores[*contProv].codPostal = atoi(token);
 
-		token = strtok(NULL, ";");
-		strcpy(proveedores[i].contrasena, token);
+		token = strtok(NULL, ",");
+		strcpy(proveedores[*contProv].contrasena, token);
 
-		i++;
+		*contProv += 1;
 		}
 
 		fclose(ficheroProveedores);
 
-		i = 0;
 
 	while (fgets(line, sizeof(line), ficheroSecciones)) {
-		char *token = strtok(line, ";");
-		secciones[i].codSeccion = atoi(token);
+		char *token = strtok(line, ",");
+		secciones[*contSec].codSeccion = atoi(token);
 
-		token = strtok(NULL, ";");
-		strcpy(secciones[i].nombreSeccion, token);
+		token = strtok(NULL, ",");
+		strcpy(secciones[*contSec].nombreSeccion, token);
 
-		i++;
+		*contSec += 1;
 		}
 
 		fclose(ficheroSecciones);
@@ -399,6 +394,7 @@ void dropTables(sqlite3 * db) {
         printf("Tablas eliminadas correctamente.\n");
     }
 }
+
 
 
 

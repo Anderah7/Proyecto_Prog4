@@ -39,11 +39,11 @@ typedef struct {
 
 void crearTablas(sqlite3 *db);
 
-void insertarDepartamentos(sqlite3 * db, Departamento departamentos[]);
-void insertarEmpleados(sqlite3 * db, Empleado empleados[]);
-void insertarProductos(sqlite3 * db, Producto productos[]);
-void insertarProveedores(sqlite3 * db, Proveedor proveedores[]);
-void insertarSecciones(sqlite3 * db, Seccion secciones[]);
+void insertarDepartamentos(sqlite3 * db, Departamento departamentos[], int contDep);
+void insertarEmpleados(sqlite3 * db, Empleado empleados[], int contEmpl);
+void insertarProductos(sqlite3 * db, Producto productos[], int contProd);
+void insertarProveedores(sqlite3 * db, Proveedor proveedores[], int contProv);
+void insertarSecciones(sqlite3 * db, Seccion secciones[], int contSec);
 
 void dropTables(sqlite3 *db);
 
@@ -59,6 +59,6 @@ void mostrarProductosEstante(Producto **productosEstante, int *seccionesEstante,
 
 void liberarMemoria(Producto **productosEstante, int num_secciones);
 
-void leerFicheros (Departamento departamentos[], Empleado empleados[], Producto productos[], Proveedor proveedores[], Seccion secciones[]);
+void leerFicheros (Departamento departamentos[], Empleado empleados[], Producto productos[], Proveedor proveedores[], Seccion secciones[], int *contDepar, int *contEmpl, int *contProd, int *contProv, int *contSec);
 
 #endif

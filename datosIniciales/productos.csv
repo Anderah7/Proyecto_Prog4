@@ -1,5 +1,60 @@
-1;Producto A;10,99;101;201
-2;Producto B;15,49;102;202
-3;Producto C;7,99;103;203
-4;Producto D;12,99;104;204
-5;Producto E;9,49;105;205
+1,Quitamanchas,68.05,1,44
+2,Jabon,11.93,1,14
+3,Esponjas,72.68,1,40
+4,Limpiador de vidrios,88.22,1,19
+5,Limpiador de pisos,72.04,1,19
+6,Cepillos,89.54,1,15
+7,Desinfectante,95.75,1,5
+8,Suavizante,36.63,1,24
+9,Limpiador multiusos,69.52,1,8
+10,Detergente,82.76,1,50
+11,Pizza congelada,60.38,2,34
+12,Pescado congelado,69.32,2,30
+13,Carne congelada,12.62,2,39
+14,Nuggets de pollo,76.25,2,24
+15,Pollo congelado,31.54,2,28
+16,Verduras congeladas,13.89,2,16
+17,Comida preparada congelada,64.08,2,19
+18,Helado,49.11,2,10
+19,Papas fritas congeladas,91.34,2,3
+20,Frutas congeladas,90.96,2,19
+21,Filete de res,13.39,3,6
+22,Chorizo,86.69,3,33
+23,Jamon,49.45,3,14
+24,Cordero,94.94,3,41
+25,Pollo fresco,45.92,3,26
+26,Carne de res,81.6,3,42
+27,Carne de cerdo,41.2,3,29
+28,Costillas de cerdo,97.61,3,12
+29,Salchichas,98.58,3,49
+30,Bacon,2.42,3,19
+31,Trucha fresca,92.54,4,38
+32,Salmon fresco,87.32,4,11
+33,Pulpo fresco,73.53,4,42
+34,Merluza fresca,67.07,4,2
+35,Calamares frescos,27.27,4,8
+36,Langosta fresca,59.86,4,38
+37,Ostras frescas,78.97,4,42
+38,Camarones frescos,87.12,4,5
+39,Mejillones frescos,38.06,4,40
+40,Atun fresco,12.77,4,29
+41,Cereal de frutas,86.63,5,29
+42,Cereal con miel,44.55,5,36
+43,Cereal sin gluten,76.38,5,4
+44,Cornflakes,19.55,5,31
+45,Cereal de chocolate,87.88,5,22
+46,Cereal integral,80.4,5,47
+47,Muesli,88.46,5,42
+48,Cereal con nueces,48.26,5,5
+49,Avena instantánea,84.28,5,36
+50,Granola,88.74,5,19
+51,Lavadora,85.38,6,25
+52,Horno electrico,39.75,6,4
+53,Plancha electrica,17.46,6,18
+54,Refrigerador,19.98,6,41
+55,Batidora electrica,44.36,6,23
+56,Microondas,71.92,6,5
+57,Aspiradora,38.92,6,39
+58,Secadora,35.97,6,36
+59,Licuadora,55.28,6,1
+60,Cafetera,37.33,6,30
