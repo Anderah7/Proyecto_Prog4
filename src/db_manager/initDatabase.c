@@ -231,6 +231,7 @@ void leerFicheros (Departamento departamentos[], Empleado empleados[], Producto 
 		(*contProd)++;
 		}
 
+
 		fclose(ficheroProductos);
 
 		i = 0;
