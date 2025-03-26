@@ -4,10 +4,10 @@
  *  Created on: 25 mar 2025
  *      Author: j.fernandezde
  */
-#include "GestorDB.h"
+#include "../../includes/GestorDB.h"
 
 #include <stdio.h>
-#include "../libs/sqlite3.h"
+#include "../../libs/sqlite3.h"
 #include <stdlib.h>
 #include <string.h>
 

@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "operaciones.h"
+#include "../includes/operaciones.h"
 #include "../includes/initDatabase.h"
 #include "../includes/GestorDB.h"
 #include "../libs/sqlite3.h"
@@ -13,8 +13,13 @@ int main (void){
 	Proveedor proveedores[100];
 	Seccion secciones[100];
 
+	int contDep = 0;
+	int contEmp = 0;
+	int contProd = 0;
+	int contProv = 0;
+	int contSec = 0;
 
-	leerFicheros(departamentos, empleados, productos, proveedores, secciones);
+	leerFicheros(departamentos, empleados, productos, proveedores, secciones, &contDep, &contEmp, &contProd, &contProv, &contSec);
 
 	sqlite3 * db;
 	int abrir = sqlite3_open("database/adate.db", &db);
@@ -29,11 +34,11 @@ int main (void){
 	dropTables(db);
 	crearTablas(db);
 
-	insertarDepartamentos(db, departamentos);
-	insertarEmpleados(db, empleados);
-	insertarProductos(db, productos);
-	insertarProveedores(db, proveedores);
-	insertarSecciones(db, secciones);
+	insertarDepartamentos(db, departamentos, contDep);
+	insertarEmpleados(db, empleados, contEmp);
+	insertarProductos(db, productos, contProd);
+	insertarProveedores(db, proveedores, contProv);
+	insertarSecciones(db, secciones, contSec);
 
 	//Array de productos
 	//Producto *productos = NULL;
