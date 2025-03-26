@@ -70,6 +70,40 @@ int main (void){
 		        }
 		    }
 		    else if(opcion == '2') {
+		    	char nomProd[30];
+		    	float precio;
+		    	int codSec = 200;
+		    	int codDep = 200;
+		    	printf("Nombre del producto: ");
+		    	fflush(stdout);
+		    	scanf("%s", nomProd);
+
+		    	printf("Precio del producto: ");
+		    	fflush(stdout);
+		    	scanf("%f", &precio);
+
+		    	printf("Seccion del producto: ");
+		    	fflush(stdout);
+		    	scanf("%i", &codSec);
+
+		    	while (codSec < 1 || codSec > 5) {
+		    			printf("Esa seccion no existe\n");
+		    			printf("Las secciones disponibles son:\n");
+		    			printf("1: limpieza\n");
+		    			printf("2: congelados\n");
+		    			printf("3: carniceria\n");
+		    			printf("4: pescaderia\n");
+		    			printf("5: cereales\n");
+		    			printf("6: electrodomesticos\n");
+		    	        printf("Seccion del producto:\n");
+				    	fflush(stdout);
+				    	scanf("%i", &codSec);
+		    	    }
+
+		    	printf("Departamento del producto: ");
+		    	fflush(stdout);
+		    	scanf("%i", &codDep);
+
 
 		    }
 		    else if(opcion == '3') {
