@@ -42,8 +42,8 @@ int main (void){
 	insertarSecciones(db, secciones, contSec);
 
 	//Array de productos
-	//Producto *productos = NULL;
-	int num_productos = mostrarProductos(db, &productos);
+	Producto *productosCarga = NULL;
+	int num_productos = mostrarProductos(db, &productosCarga);
 
 	//Para la funcion ordenar
 	Producto **productosEstante;
@@ -120,13 +120,31 @@ int main (void){
 
 		    }
 		    else if(opcion == '3') {
+		    	int idProd;
+		    	int idMax = obtenerIdUltimoProducto(db);
+
+		    	printf("Introduce el id del producto a eliminar: \n");
+		    	fflush(stdout);
+		    	scanf("%i", &idProd);
+
+		    	while(idProd < 1 || idProd > idMax) {
+		    		printf("Este producto no existe");
+		    		printf("Los productos disponibles van del 1 al %i", idMax);
+		    		printf("Introduce el id del producto a eliminar: \n");
+		    		fflush(stdout);
+		    		scanf("%i", &idProd);
+
+		    	}
+
+		    	eliminarProducto(db, idProd);
 
 		    }
 		    else if(opcion == '4') {
 		    	qsort(productos, num_productos, sizeof(Producto), compararPorPrecio);
 		    }
 		    else if(opcion == '5') {
-		    	ordenarEstante(productos, num_productos, &productosEstante, &num_secciones, &seccionesEstante);
+		    	int numProds = obtenerIdUltimoProducto(db);
+		    	ordenarEstante(productos, numProds, &productosEstante, &num_secciones, &seccionesEstante);
 		    	mostrarProductosEstante(productosEstante, seccionesEstante, num_secciones);
 		    	liberarMemoria(productosEstante, num_secciones);
 		    	free(seccionesEstante);

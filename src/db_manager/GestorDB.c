@@ -83,6 +83,22 @@ void anadirProducto (sqlite3 * db,  char nomProd[], float precio, int codSec, in
 			        }
 }
 
+void eliminarProducto(sqlite3 * db, int idProd) {
+	char * mensajeError = 0;
+	char sql[256];
+	int contador = obtenerIdUltimoProducto(db);
+	contador -= 1;
+
+	sprintf(sql, "DELETE FROM producto WHERE id_Producto = %i", idProd);
+
+	if (sqlite3_exec(db, sql, 0, 0, &mensajeError) != SQLITE_OK) {
+		printf("Error al eliminar el producto: %s\n", mensajeError);
+		sqlite3_free(mensajeError);
+	} else {
+		printf("Producto eliminado: %i\n", idProd);
+	}
+}
+
 
 int obtenerIdUltimoProducto(sqlite3 *db) {
     sqlite3_stmt *stmt;
