@@ -139,6 +139,7 @@ int main (void){
 		    	}
 
 		    	eliminarProducto(db, idProd);
+		    	num_productos = mostrarProductos(db, &productosCarga);
 
 		    }
 		    else if(opcion == '4') {
