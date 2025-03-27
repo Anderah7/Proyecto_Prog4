@@ -13,8 +13,6 @@ int contarSecciones(Producto *productos, int num_productos, int **seccionesEstan
 
 void mostrarProductosEstante(Producto **productosEstante, int *seccionesEstante, int num_secciones);
 
-void anadirProducto(sqlite3 * db, int *contProd, char nomProd[], float precio, int codSec, int codDep);
-
 void liberarMemoria(Producto **productosEstante, int num_secciones);
 
 #endif

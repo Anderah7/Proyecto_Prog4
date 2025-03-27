@@ -27,6 +27,7 @@ void dropTables(sqlite3 * db) {
     }
 }
 
+
 int mostrarProductos(sqlite3 *db, Producto **productos) {
 
 	sqlite3_stmt *stmt;
@@ -64,3 +65,39 @@ int mostrarProductos(sqlite3 *db, Producto **productos) {
 
 	return contador;
 }
+
+void anadirProducto (sqlite3 * db,  char nomProd[], float precio, int codSec, int codDep){
+	char * mensajeError = 0;
+	char sql[256];
+	int contador = obtenerIdUltimoProducto(db);
+	contador += 1;
+
+	sprintf(sql, "INSERT INTO producto (id_Producto, nombre, precio, id_Proveedor, cod_Seccion) VALUES (%i, '%s', %f, %i, %i);",
+				contador, nomProd, precio, codSec, codDep);
+
+	if (sqlite3_exec(db, sql, 0, 0, &mensajeError) != SQLITE_OK) {
+			            printf("Error al insertar el producto: %s\n", mensajeError);
+			            sqlite3_free(mensajeError);
+			        } else {
+			            printf("Producto insertado: %i, %s, %f, %i, %i\n", contador, nomProd, precio, codSec, codDep);
+			        }
+}
+
+
+int obtenerIdUltimoProducto(sqlite3 *db) {
+    sqlite3_stmt *stmt;
+    const char *sql = "SELECT MAX(id_Producto) FROM producto;";
+    int maximo = 0;
+
+    if (sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) == SQLITE_OK) {
+        if (sqlite3_step(stmt) == SQLITE_ROW) {
+            maximo = sqlite3_column_int(stmt, 0);
+        }
+        sqlite3_finalize(stmt);
+    } else {
+        printf("Error al obtener la id del ultimo producto: %s\n", sqlite3_errmsg(db));
+    }
+
+    return maximo;
+}
+

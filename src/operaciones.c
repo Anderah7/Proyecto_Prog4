@@ -85,21 +85,6 @@ void mostrarProductosEstante(Producto **productosEstante, int *seccionesEstante,
 	}
 }
 
-void anadirProducto (sqlite3 * db, int *contProd, char nomProd[], float precio, int codSec, int codDep){ // esto solo funciona si la base de datos se reinicia con el programa
-	char * mensajeError = 0;
-	char sql[256];
-	(*contProd)++; // esto es para que la id del producto sea la iguiente a la anterior
-
-	sprintf(sql, "INSERT INTO producto (id_Producto, nombre, precio, id_Proveedor, cod_Seccion) VALUES (%i, '%s', %f, %i, %i);",
-				                *contProd, nomProd, precio, codSec, codDep);
-
-	if (sqlite3_exec(db, sql, 0, 0, &mensajeError) != SQLITE_OK) {
-			            printf("Error al insertar el producto: %s\n", mensajeError);
-			            sqlite3_free(mensajeError);
-			        } else {
-			            printf("Producto insertado: %i, %s, %f, %i, %i\n", *contProd, nomProd, precio, codSec, codDep);
-			        }
-}
 
 void liberarMemoria(Producto **productosEstante, int num_secciones) {
 	for(int i = 0; i < num_secciones; i++) {

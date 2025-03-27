@@ -229,7 +229,7 @@ void leerFicheros (Departamento departamentos[], Empleado empleados[], Producto 
 		token = strtok(NULL, ",");
 		productos[*contProd].codProveedor = atoi(token);
 
-		(contProd)++;
+		(*contProd)++;
 		}
 
 

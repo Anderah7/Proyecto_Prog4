@@ -15,4 +15,8 @@ void dropTables(sqlite3 *db);
 
 int mostrarProductos(sqlite3 *db, Producto **productos);
 
+void anadirProducto (sqlite3 * db,  char nomProd[], float precio, int codSec, int codDep);
+
+int obtenerIdUltimoProducto(sqlite3 *db);
+
 #endif /* SRC_DB_MANAGER_GESTORDB_H_ */

@@ -13,6 +13,7 @@ int main (void){
 	Proveedor proveedores[100];
 	Seccion secciones[100];
 
+	//no usar estos contadores para mostrar datos de la base de datos, usar la funcion "obtenerIdUltimoProducto" para sacar el numero de productos
 	int contDep = 0;
 	int contEmp = 0;
 	int contProd = 0;
@@ -114,7 +115,7 @@ int main (void){
 		    			scanf("%i", &codDep);
 		    		};
 
-		    	anadirProducto(db, &contProd, nomProd, precio, codSec, codDep);
+		    	anadirProducto(db, nomProd, precio, codSec, codDep);
 
 
 		    }
