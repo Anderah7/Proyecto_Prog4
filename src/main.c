@@ -66,6 +66,7 @@ int main (void){
 		    scanf(" %c", &opcion);
 
 		    if(opcion == '1') {
+		    	int num_productos = mostrarProductos(db, &productosCarga);
 		    	for (int i = 0; i < num_productos; ++i) {
 		    		printf("ID: %d, Nombre: %s, Precio: %.2f, Proveedor: %d, Seccion: %d\n", productos[i].idProd, productos[i].nombreProd, productos[i].precio, productos[i].codProveedor, productos[i].codSeccion);
 		        }
@@ -122,14 +123,15 @@ int main (void){
 		    else if(opcion == '3') {
 		    	int idProd;
 		    	int idMax = obtenerIdUltimoProducto(db);
+		    	printf("%i", idMax);
 
 		    	printf("Introduce el id del producto a eliminar: \n");
 		    	fflush(stdout);
 		    	scanf("%i", &idProd);
 
 		    	while(idProd < 1 || idProd > idMax) {
-		    		printf("Este producto no existe");
-		    		printf("Los productos disponibles van del 1 al %i", idMax);
+		    		printf("Este producto no existe\n");
+		    		printf("Los productos disponibles van del 1 al %i\n", idMax);
 		    		printf("Introduce el id del producto a eliminar: \n");
 		    		fflush(stdout);
 		    		scanf("%i", &idProd);
