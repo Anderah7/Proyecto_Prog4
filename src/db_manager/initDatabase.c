@@ -80,6 +80,7 @@ void insertarDepartamentos(sqlite3 * db, Departamento departamentos[], int contD
 		            printf("Departamento insertado: %i, %s, %i\n", departamentos[i].idDepartamento, departamentos[i].nombreDepartamento, departamentos[i].NSSJefe);
 		        }
 	}
+	printf("\n");
 }
 
 void insertarEmpleados(sqlite3 * db, Empleado empleados[], int contEmp) {
@@ -98,6 +99,7 @@ void insertarEmpleados(sqlite3 * db, Empleado empleados[], int contEmp) {
 		            printf("Empleado insertado: %i, %s, %s, %i, %i\n", empleados[i].NSS, empleados[i].nombreEmpleado, empleados[i].contrasena, empleados[i].idDepartamento, empleados[i].codSeccion);
 		        }
 	}
+	printf("\n");
 }
 
 
@@ -117,6 +119,7 @@ void insertarProductos(sqlite3 * db, Producto productos[], int contPro) {
 		            printf("Producto insertado: %i, %s, %f, %i, %i\n", productos[i].idProd, productos[i].nombreProd, productos[i].precio, productos[i].codProveedor, productos[i].codSeccion);
 		        }
 	}
+	printf("\n");
 }
 
 
@@ -137,6 +140,7 @@ void insertarProveedores(sqlite3 * db, Proveedor proveedores[], int contPov) {
 		            										//al acabar en string no necesita el \n
 		        }
 	}
+	printf("\n\n");
 }
 
 
@@ -157,6 +161,7 @@ void insertarSecciones(sqlite3 * db, Seccion secciones[], int contSec) {
 		            								//al acabar en string no necesita el \n
 		        }
 	}
+	printf("\n\n");
 }
 
 void leerFicheros (Departamento departamentos[], Empleado empleados[], Producto productos[], Proveedor proveedores[], Seccion secciones[], int *contDep, int *contEmp, int *contProd, int *contProv, int *contSec){
