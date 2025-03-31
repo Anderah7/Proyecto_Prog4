@@ -1,0 +1,16 @@
+/*
+ * interfaz.h
+ *
+ *  Created on: 31 mar 2025
+ *      Author: a.azcorra
+ */
+
+#ifndef INCLUDES_INTERFAZ_H_
+#define INCLUDES_INTERFAZ_H_
+
+#include "../libs/sqlite3.h"
+#include "../includes/estructuras.h"
+
+void interfazAnadirProducto(sqlite3 *db);
+
+#endif /* INCLUDES_INTERFAZ_H_ */

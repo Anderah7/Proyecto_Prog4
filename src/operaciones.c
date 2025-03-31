@@ -74,6 +74,7 @@ int contarSecciones(Producto *productos, int num_productos, int **seccionesEstan
 	return num_secciones;
 }
 
+
 void mostrarProductosEstante(Producto **productosEstante, int *seccionesEstante, int num_secciones) {
 	for(int i = 0; i < num_secciones; i++) {
 		printf("Seccion: %d", seccionesEstante[i]);

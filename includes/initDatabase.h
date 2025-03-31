@@ -13,11 +13,11 @@
 
 void crearTablas(sqlite3 *db);
 
-void insertarDepartamentos(sqlite3 * db, Departamento departamento);
-void insertarEmpleados(sqlite3 * db, Empleado empleado);
-void insertarProductos(sqlite3 * db, Producto producto);
-void insertarProveedores(sqlite3 * db, Proveedor proveedor);
-void insertarSecciones(sqlite3 * db, Seccion seccion);
+void insertarDepartamentos(sqlite3 *db, Departamento departamento);
+void insertarEmpleados(sqlite3 *db, Empleado empleado);
+void insertarProductos(sqlite3 *db, Producto producto);
+void insertarProveedores(sqlite3 *db, Proveedor proveedor);
+void insertarSecciones(sqlite3 *db, Seccion seccion);
 
-void cargarFicheros (sqlite3 * db);
+void cargarFicheros (sqlite3 *db);
 #endif /* INITDATABASE_H_ */
