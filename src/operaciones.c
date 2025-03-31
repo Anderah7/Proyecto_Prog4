@@ -86,6 +86,10 @@ void mostrarProductosEstante(Producto **productosEstante, int *seccionesEstante,
 	}
 }
 
+void imprimirProducto(Producto p) {
+    printf("ID: %d, Nombre: %s, Precio: %.2f, Sección: %d, Proveedor: %d\n",
+           p.idProd, p.nombreProd, p.precio, p.codSeccion, p.codProveedor);
+}
 
 void liberarMemoria(Producto **productosEstante, int num_secciones) {
 	for(int i = 0; i < num_secciones; i++) {

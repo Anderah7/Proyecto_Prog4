@@ -14,51 +14,54 @@
 #include <stdlib.h>
 
 void interfazAnadirProducto(sqlite3 *db){
-	char nomProd[30];
-	float precio;
-	int codSec = 200;
-	int codDep = 200;
+	Producto producto;
+
+	producto.idProd = obtenerIdUltimoProducto(db) + 1;
 
 	printf("Introduce el nombre del producto: ");
 	fflush(stdout);
-	scanf("%s", nomProd);
+	scanf("%s", producto.nombreProd);
 
 	printf("Introduce el precio del producto: ");
 	fflush(stdout);
-	scanf("%f", &precio);
+	scanf("%f", &producto.precio);
 
 	printf("Introduce la seccion del producto: ");
 	fflush(stdout);
-	scanf("%i", &codSec);
+	scanf("%i", &producto.codSeccion);
 
-	while (codSec < 1 || codSec > 5) {
-	printf("Esa seccion no existe\n");
-	printf("Las secciones disponibles son:\n");
-	printf("1: limpieza\n");
-	printf("2: congelados\n");
-	printf("3: carniceria\n");
-	printf("4: pescaderia\n");
-	printf("5: cereales\n");
-	printf("6: electrodomesticos\n");
-	printf("Introduce la seccion del producto:\n");
+	while (producto.codSeccion < 1 || producto.codSeccion > 6) {
+		printf("Esa seccion no existe\n");
+		printf("Las secciones disponibles son:\n");
+		printf("1: limpieza\n");
+		printf("2: congelados\n");
+		printf("3: carniceria\n");
+		printf("4: pescaderia\n");
+		printf("5: cereales\n");
+		printf("6: electrodomesticos\n");
+		printf("Introduce la seccion del producto:\n");
+		fflush(stdout);
+		scanf("%i", &producto.codSeccion);
+			   }
+	printf("Proveedor del producto: ");
 	fflush(stdout);
-	scanf("%i", &codSec);
-			    	    }
-	printf("Departamento del producto: ");
-	fflush(stdout);
-	scanf("%i", &codDep);
+	scanf("%i", &producto.codProveedor);
 
-		while (codDep < 1 || codDep > 3) {
-			printf("Ese departamento no existe\n");
-			printf("Los separtamentos disponibles son:\n");
-			printf("1: limpieza\n");
-			printf("2: comida\n");
-			printf("3: Electrodomesticos\n");
-			printf("Introduce el departamento del producto:\n");
-			fflush(stdout);
-			scanf("%i", &codDep);
+	while (producto.codProveedor < 1 || producto.codProveedor > 6) {
+		printf("Ese departamento no existe\n");
+		printf("Los separtamentos disponibles son:\n");
+		printf("1: Proveedor limpieza\n");
+		printf("2: Proveedor congelados\n");
+		printf("3: Proveedor carniceria\n");
+		printf("4: Proveedor pescaderia\n");
+		printf("5: Proveedor cereales\n");
+		printf("6: Proveedor electrodomesticos\n");
+		printf("Introduce el departamento del producto:\n");
+		fflush(stdout);
+		scanf("%i", &producto.codProveedor);
 	};
 
-	anadirProducto(db, nomProd, precio, codSec, codDep);
+	insertarProducto(db, producto);
+	imprimirProducto(producto);
 
 }

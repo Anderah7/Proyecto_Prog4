@@ -13,6 +13,8 @@ int contarSecciones(Producto *productos, int num_productos, int **seccionesEstan
 
 void mostrarProductosEstante(Producto **productosEstante, int *seccionesEstante, int num_secciones);
 
+void imprimirProducto(Producto productos);
+
 void liberarMemoria(Producto **productosEstante, int num_secciones);
 
 #endif

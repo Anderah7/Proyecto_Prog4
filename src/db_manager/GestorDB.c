@@ -23,7 +23,7 @@ void dropTables(sqlite3 * db) {
         printf("Error al borrar tablas: %s\n", errMsg);
         sqlite3_free(errMsg);
     } else {
-        printf("Tablas eliminadas correctamente.\n");
+        printf("Tablas eliminadas correctamente\n");
     }
 }
 
@@ -66,22 +66,6 @@ int mostrarProductos(sqlite3 *db, Producto **productos) {
 	return contador;
 }
 
-void anadirProducto (sqlite3 * db,  char nomProd[], float precio, int codSec, int codDep){
-	char * mensajeError = 0;
-	char sql[256];
-	int contador = obtenerIdUltimoProducto(db);
-	contador += 1;
-
-	sprintf(sql, "INSERT INTO producto (id_Producto, nombre, precio, id_Proveedor, cod_Seccion) VALUES (%i, '%s', %f, %i, %i);",
-				contador, nomProd, precio, codSec, codDep);
-
-	if (sqlite3_exec(db, sql, 0, 0, &mensajeError) != SQLITE_OK) {
-			            printf("Error al insertar el producto: %s\n", mensajeError);
-			            sqlite3_free(mensajeError);
-			        } else {
-			            printf("Producto insertado: %i, %s, %f, %i, %i\n", contador, nomProd, precio, codSec, codDep);
-			        }
-}
 
 void eliminarProducto(sqlite3 * db, int idProd) {
 	char * mensajeError = 0;

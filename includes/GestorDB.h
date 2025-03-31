@@ -15,7 +15,7 @@ void dropTables(sqlite3 *db);
 
 int mostrarProductos(sqlite3 *db, Producto **productos);
 
-void anadirProducto (sqlite3 * db,  char nomProd[], float precio, int codSec, int codDep);
+void anadirProducto (sqlite3 * db, Producto producto);
 
 void eliminarProducto(sqlite3 * db, int idProd);
 

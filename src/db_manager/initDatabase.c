@@ -76,9 +76,9 @@ void insertarDepartamento(sqlite3 * db, Departamento departamento) {
 		            printf("Error al insertar el departamento: %s\n", mensajeError);
 		            sqlite3_free(mensajeError);
 		        } else {
-		            printf("Departamento insertado: %i, %s, %i\n", departamento.idDepartamento, departamento.nombreDepartamento, departamento.NSSJefe);
+		            //printf("Departamento insertado: %i, %s, %i\n", departamento.idDepartamento, departamento.nombreDepartamento, departamento.NSSJefe);
 		        }
-	printf("\n");
+
 }
 
 void insertarEmpleado(sqlite3 * db, Empleado empleado) {
@@ -93,9 +93,9 @@ void insertarEmpleado(sqlite3 * db, Empleado empleado) {
 		            printf("Error al insertar el empleado: %s\n", mensajeError);
 		            sqlite3_free(mensajeError);
 		        } else {
-		            printf("Empleado insertado: %i, %s, %s, %i, %i\n", empleado.NSS, empleado.nombreEmpleado, empleado.contrasena, empleado.idDepartamento, empleado.codSeccion);
+		            //printf("Empleado insertado: %i, %s, %s, %i, %i\n", empleado.NSS, empleado.nombreEmpleado, empleado.contrasena, empleado.idDepartamento, empleado.codSeccion);
 		        }
-	printf("\n");
+
 }
 
 
@@ -111,10 +111,9 @@ void insertarProducto(sqlite3 * db, Producto producto) {
 		            printf("Error al insertar el producto: %s\n", mensajeError);
 		            sqlite3_free(mensajeError);
 		        } else {
-		            printf("Producto insertado: %i, %s, %f, %i, %i\n", producto.idProd, producto.nombreProd, producto.precio, producto.codProveedor, producto.codSeccion);
+		            //printf("Producto insertado: %i, %s, %f, %i, %i\n", producto.idProd, producto.nombreProd, producto.precio, producto.codProveedor, producto.codSeccion);
 		        }
 
-	printf("\n");
 }
 
 
@@ -130,10 +129,9 @@ void insertarProveedor(sqlite3 * db, Proveedor proveedor) {
 		            printf("Error al insertar el proveedor: %s\n", mensajeError);
 		            sqlite3_free(mensajeError);
 		        } else {
-		            printf("Proveedor insertado: %i, %s, %i, %s", proveedor.codProveedor, proveedor.nombreProveedor, proveedor.codPostal, proveedor.contrasena);
+		            //printf("Proveedor insertado: %i, %s, %i, %s", proveedor.codProveedor, proveedor.nombreProveedor, proveedor.codPostal, proveedor.contrasena);
 		            										//al acabar en string no necesita el \n
 		        }
-	printf("\n\n");
 }
 
 
@@ -149,10 +147,9 @@ void insertarSeccion(sqlite3 * db, Seccion seccione) {
 		            printf("Error al insertar la seccion: %s\n", mensajeError);
 		            sqlite3_free(mensajeError);
 		        } else {
-		            printf("Seccion insertado: %i, %s", seccione.codSeccion, seccione.nombreSeccion);
+		            //printf("Seccion insertado: %i, %s", seccione.codSeccion, seccione.nombreSeccion);
 		            								//al acabar en string no necesita el \n
 		        }
-	printf("\n\n");
 }
 
 void cargarFicheros (sqlite3 * db){
@@ -186,6 +183,8 @@ void cargarFicheros (sqlite3 * db){
 	}
 
 		fclose(ficheroDepartamentos);
+		printf("Departamentos insertados correctamente");
+		printf("\n");
 
 
 	while (fgets(line, sizeof(line), ficheroEmpleados)) {
@@ -209,6 +208,8 @@ void cargarFicheros (sqlite3 * db){
 		}
 
 		fclose(ficheroEmpleados);
+		printf("Empleados insertados correctamente");
+		printf("\n");
 
 
 	while (fgets(line, sizeof(line), ficheroProductos)) {
@@ -231,8 +232,9 @@ void cargarFicheros (sqlite3 * db){
 		insertarProducto(db, producto);
 		}
 
-
 		fclose(ficheroProductos);
+		printf("Productos insertados correctamente");
+		printf("\n");
 
 
 	while (fgets(line, sizeof(line), ficheroProveedores)) {
@@ -253,6 +255,8 @@ void cargarFicheros (sqlite3 * db){
 		}
 
 		fclose(ficheroProveedores);
+		printf("Proveedores insertados correctamente");
+		printf("\n");
 
 
 	while (fgets(line, sizeof(line), ficheroSecciones)) {
@@ -267,5 +271,7 @@ void cargarFicheros (sqlite3 * db){
 		}
 
 		fclose(ficheroSecciones);
+		printf("Secciones insertadas correctamente");
+		printf("\n\n");
 }
 
