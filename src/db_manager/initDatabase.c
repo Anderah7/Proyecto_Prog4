@@ -32,14 +32,14 @@ void crearTablas(sqlite3 *db) {
 			"precio REAL, "
 			"id_Proveedor INT(5), "
 			"cod_Seccion INT(5), "
-			"FOREIGN KEY(id_Proveedor) REFERENCES proveedor(id_Proveedor), "
-			"FOREIGN KEY(cod_Seccion) REFERENCES seccion(cod_Seccion));"
+			"FOREIGN KEY(id_Proveedor) REFERENCES proveedor(id_Proveedor) ON DELETE CASCADE, "
+			"FOREIGN KEY(cod_Seccion) REFERENCES seccion(cod_Seccion) ON DELETE CASCADE);"
 
 			"CREATE TABLE IF NOT EXISTS departamento("
 			"id_Departamento INT(5) PRIMARY KEY, "
 			"nombre VARCHAR(50), "
 			"NSS_Jefe INT(11), "
-			"FOREIGN KEY(NSS_Jefe) REFERENCES empleado(NSS_Empleado)); "
+			"FOREIGN KEY(NSS_Jefe) REFERENCES empleado(NSS_Empleado) ON DELETE CASCADE); "
 
 
 			"CREATE TABLE IF NOT EXISTS empleado("
@@ -48,8 +48,8 @@ void crearTablas(sqlite3 *db) {
 			"contrasena VARCHAR(30), "
 			"id_Departamento INT(5), "
 			"id_Seccion INT(5), "
-			"FOREIGN KEY(id_Departamento) REFERENCES departamento(id_Departamento), "
-			"FOREIGN KEY(id_Seccion) REFERENCES seccion(cod_seccion));";
+			"FOREIGN KEY(id_Departamento) REFERENCES departamento(id_Departamento) ON DELETE CASCADE, "
+			"FOREIGN KEY(id_Seccion) REFERENCES seccion(cod_seccion) ON DELETE CASCADE);";
 
 
 	int ejecutar = sqlite3_exec(db, sql, 0, 0, &mensajeError);
