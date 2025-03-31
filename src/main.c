@@ -13,14 +13,6 @@ int main (void){
 	Proveedor proveedores[100];
 	Seccion secciones[100];
 
-	//no usar estos contadores para mostrar datos de la base de datos, usar la funcion "obtenerIdUltimoProducto" para sacar el numero de productos
-	int contDep = 0;
-	int contEmp = 0;
-	int contProd = 0;
-	int contProv = 0;
-	int contSec = 0;
-
-	leerFicheros(departamentos, empleados, productos, proveedores, secciones, &contDep, &contEmp, &contProd, &contProv, &contSec);
 
 	sqlite3 * db;
 	int abrir = sqlite3_open("database/adate.db", &db);
@@ -34,12 +26,9 @@ int main (void){
 
 	dropTables(db);
 	crearTablas(db);
+	cargarFicheros(db);
 
-	insertarDepartamentos(db, departamentos, contDep);
-	insertarEmpleados(db, empleados, contEmp);
-	insertarProductos(db, productos, contProd);
-	insertarProveedores(db, proveedores, contProv);
-	insertarSecciones(db, secciones, contSec);
+
 
 	//Array de productos
 	Producto *productosCarga = NULL;

@@ -64,107 +64,98 @@ void crearTablas(sqlite3 *db) {
 
 }
 
-void insertarDepartamentos(sqlite3 * db, Departamento departamentos[], int contDep) {
+void insertarDepartamento(sqlite3 * db, Departamento departamento) {
 	char * mensajeError = 0;
 	char sql[256];
 
-	for (int i = 0; i < contDep; i++) {
 		sprintf(sql, "INSERT INTO departamento (id_Departamento, nombre, NSS_Jefe) VALUES (%i, '%s', %i);",
-			                departamentos[i].idDepartamento, departamentos[i].nombreDepartamento, departamentos[i].NSSJefe); //aqui falta el NSS del jefe (que no esta en la base de datos)
+			                departamento.idDepartamento, departamento.nombreDepartamento, departamento.NSSJefe);
 
 
 	 if (sqlite3_exec(db, sql, 0, 0, &mensajeError) != SQLITE_OK) {
 		            printf("Error al insertar el departamento: %s\n", mensajeError);
 		            sqlite3_free(mensajeError);
 		        } else {
-		            printf("Departamento insertado: %i, %s, %i\n", departamentos[i].idDepartamento, departamentos[i].nombreDepartamento, departamentos[i].NSSJefe);
+		            printf("Departamento insertado: %i, %s, %i\n", departamento.idDepartamento, departamento.nombreDepartamento, departamento.NSSJefe);
 		        }
-	}
 	printf("\n");
 }
 
-void insertarEmpleados(sqlite3 * db, Empleado empleados[], int contEmp) {
+void insertarEmpleado(sqlite3 * db, Empleado empleado) {
 	char * mensajeError = 0;
 	char sql[256];
 
-	for (int i = 0; i < contEmp; i++) {
 		sprintf(sql, "INSERT INTO empleado (NSS_Empleado, nombre, contrasena, id_Departamento, id_Seccion) VALUES (%i, '%s', '%s', %i, %i);",
-			                empleados[i].NSS, empleados[i].nombreEmpleado, empleados[i].contrasena, empleados[i].idDepartamento, empleados[i].codSeccion);
+			                empleado.NSS, empleado.nombreEmpleado, empleado.contrasena, empleado.idDepartamento, empleado.codSeccion);
 
 
 	 if (sqlite3_exec(db, sql, 0, 0, &mensajeError) != SQLITE_OK) {
 		            printf("Error al insertar el empleado: %s\n", mensajeError);
 		            sqlite3_free(mensajeError);
 		        } else {
-		            printf("Empleado insertado: %i, %s, %s, %i, %i\n", empleados[i].NSS, empleados[i].nombreEmpleado, empleados[i].contrasena, empleados[i].idDepartamento, empleados[i].codSeccion);
+		            printf("Empleado insertado: %i, %s, %s, %i, %i\n", empleado.NSS, empleado.nombreEmpleado, empleado.contrasena, empleado.idDepartamento, empleado.codSeccion);
 		        }
-	}
 	printf("\n");
 }
 
 
-void insertarProductos(sqlite3 * db, Producto productos[], int contPro) {
+void insertarProducto(sqlite3 * db, Producto producto) {
 	char * mensajeError = 0;
 	char sql[256];
 
-	for (int i = 0; i < contPro; i++) {
 		sprintf(sql, "INSERT INTO producto (id_Producto, nombre, precio, id_Proveedor, cod_Seccion) VALUES (%i, '%s', %f, %i, %i);",
-			                productos[i].idProd, productos[i].nombreProd, productos[i].precio, productos[i].codProveedor, productos[i].codSeccion);
+			                producto.idProd, producto.nombreProd, producto.precio, producto.codProveedor, producto.codSeccion);
 
 
 	 if (sqlite3_exec(db, sql, 0, 0, &mensajeError) != SQLITE_OK) {
 		            printf("Error al insertar el producto: %s\n", mensajeError);
 		            sqlite3_free(mensajeError);
 		        } else {
-		            printf("Producto insertado: %i, %s, %f, %i, %i\n", productos[i].idProd, productos[i].nombreProd, productos[i].precio, productos[i].codProveedor, productos[i].codSeccion);
+		            printf("Producto insertado: %i, %s, %f, %i, %i\n", producto.idProd, producto.nombreProd, producto.precio, producto.codProveedor, producto.codSeccion);
 		        }
-	}
+
 	printf("\n");
 }
 
 
-void insertarProveedores(sqlite3 * db, Proveedor proveedores[], int contPov) {
+void insertarProveedor(sqlite3 * db, Proveedor proveedor) {
 	char * mensajeError = 0;
 	char sql[256];
 
-	for (int i = 0; i < contPov; i++) {
 		sprintf(sql, "INSERT INTO proveedor (id_Proveedor, nombre, codigo_Postal, contrasena) VALUES (%i, '%s', %i, '%s');",
-			                proveedores[i].codProveedor, proveedores[i].nombreProveedor, proveedores[i].codPostal, proveedores[i].contrasena);
+			                proveedor.codProveedor, proveedor.nombreProveedor, proveedor.codPostal, proveedor.contrasena);
 
 
 	 if (sqlite3_exec(db, sql, 0, 0, &mensajeError) != SQLITE_OK) {
 		            printf("Error al insertar el proveedor: %s\n", mensajeError);
 		            sqlite3_free(mensajeError);
 		        } else {
-		            printf("Proveedor insertado: %i, %s, %i, %s", proveedores[i].codProveedor, proveedores[i].nombreProveedor, proveedores[i].codPostal, proveedores[i].contrasena);
+		            printf("Proveedor insertado: %i, %s, %i, %s", proveedor.codProveedor, proveedor.nombreProveedor, proveedor.codPostal, proveedor.contrasena);
 		            										//al acabar en string no necesita el \n
 		        }
-	}
 	printf("\n\n");
 }
 
 
-void insertarSecciones(sqlite3 * db, Seccion secciones[], int contSec) {
+void insertarSeccion(sqlite3 * db, Seccion seccione) {
 	char * mensajeError = 0;
 	char sql[256];
 
-	for (int i = 0; i < contSec; i++) {
 		sprintf(sql, "INSERT INTO producto (cod_seccion, nombre) VALUES (%i, '%s');",
-			                secciones[i].codSeccion, secciones[i].nombreSeccion);
+			                seccione.codSeccion, seccione.nombreSeccion);
 
 
 	 if (sqlite3_exec(db, sql, 0, 0, &mensajeError) != SQLITE_OK) {
 		            printf("Error al insertar la seccion: %s\n", mensajeError);
 		            sqlite3_free(mensajeError);
 		        } else {
-		            printf("Seccion insertado: %i, %s", secciones[i].codSeccion, secciones[i].nombreSeccion);
+		            printf("Seccion insertado: %i, %s", seccione.codSeccion, seccione.nombreSeccion);
 		            								//al acabar en string no necesita el \n
 		        }
-	}
 	printf("\n\n");
 }
 
-void leerFicheros (Departamento departamentos[], Empleado empleados[], Producto productos[], Proveedor proveedores[], Seccion secciones[], int *contDep, int *contEmp, int *contProd, int *contProv, int *contSec){
+void cargarFicheros (sqlite3 * db){
 	FILE *ficheroDepartamentos = fopen("database/datosIniciales/departamentos.csv", "r");
 	FILE *ficheroEmpleados = fopen("database/datosIniciales/empleados.csv", "r");
 	FILE *ficheroProductos = fopen("database/datosIniciales/productos.csv", "r");
@@ -181,60 +172,63 @@ void leerFicheros (Departamento departamentos[], Empleado empleados[], Producto 
 
 
 	while (fgets(line, sizeof(line), ficheroDepartamentos)) {
+		Departamento departamento;
 		 char *token = strtok(line, ",");
-		 departamentos[*contDep].idDepartamento = atoi(token);
+		 departamento.idDepartamento = atoi(token);
 
 		 token = strtok(NULL, ",");
-		 strcpy(departamentos[*contDep].nombreDepartamento, token);
+		 strcpy(departamento.nombreDepartamento, token);
 
 		 token = strtok(NULL, ",");
-		 departamentos[*contDep].NSSJefe = atoi(token);
+		 departamento.NSSJefe = atoi(token);
 
-		 (*contDep)++;
+		 insertarDepartamento(db, departamento);
 	}
 
 		fclose(ficheroDepartamentos);
 
 
 	while (fgets(line, sizeof(line), ficheroEmpleados)) {
+		Empleado empleado;
 		char *token = strtok(line, ",");
-		empleados[*contEmp].NSS = atoi(token);
+		empleado.NSS = atoi(token);
 
 		token = strtok(NULL, ",");
-		strcpy(empleados[*contEmp].nombreEmpleado, token);
+		strcpy(empleado.nombreEmpleado, token);
 
 		token = strtok(NULL, ",");
-		strcpy(empleados[*contEmp].contrasena, token);
+		strcpy(empleado.contrasena, token);
 
 		token = strtok(NULL, ",");
-		empleados[*contEmp].codSeccion = atoi(token);
+		empleado.codSeccion = atoi(token);
 
 		token = strtok(NULL, ",");
-		empleados[*contEmp].idDepartamento = atoi(token);
+		empleado.idDepartamento = atoi(token);
 
-		(*contEmp)++;
+		insertarEmpleado(db, empleado);
 		}
 
 		fclose(ficheroEmpleados);
 
 
 	while (fgets(line, sizeof(line), ficheroProductos)) {
+		Producto producto;
 		char *token = strtok(line, ",");
-		productos[*contProd].idProd = atoi(token);
+		producto.idProd = atoi(token);
 
 		token = strtok(NULL, ",");
-		strcpy(productos[*contProd].nombreProd, token);
+		strcpy(producto.nombreProd, token);
 
 		token = strtok(NULL, ",");
-		productos[*contProd].precio = atof(token);
+		producto.precio = atof(token);
 
 		token = strtok(NULL, ",");
-		productos[*contProd].codSeccion = atoi(token);
+		producto.codSeccion = atoi(token);
 
 		token = strtok(NULL, ",");
-		productos[*contProd].codProveedor = atoi(token);
+		producto.codProveedor = atoi(token);
 
-		(*contProd)++;
+		insertarProducto(db, producto);
 		}
 
 
@@ -242,32 +236,34 @@ void leerFicheros (Departamento departamentos[], Empleado empleados[], Producto 
 
 
 	while (fgets(line, sizeof(line), ficheroProveedores)) {
+		Proveedor proveedor;
 		char *token = strtok(line, ",");
-		proveedores[*contProv].codProveedor = atoi(token);
+		proveedor.codProveedor = atoi(token);
 
 		token = strtok(NULL, ",");
-		strcpy(proveedores[*contProv].nombreProveedor, token);
+		strcpy(proveedor.nombreProveedor, token);
 
 		token = strtok(NULL, ",");
-		proveedores[*contProv].codPostal = atoi(token);
+		proveedor.codPostal = atoi(token);
 
 		token = strtok(NULL, ",");
-		strcpy(proveedores[*contProv].contrasena, token);
+		strcpy(proveedor.contrasena, token);
 
-		(*contProv)++;
+		insertarProveedor(db, proveedor);
 		}
 
 		fclose(ficheroProveedores);
 
 
 	while (fgets(line, sizeof(line), ficheroSecciones)) {
+		Seccion seccion;
 		char *token = strtok(line, ",");
-		secciones[*contSec].codSeccion = atoi(token);
+		seccion.codSeccion = atoi(token);
 
 		token = strtok(NULL, ",");
-		strcpy(secciones[*contSec].nombreSeccion, token);
+		strcpy(seccion.nombreSeccion, token);
 
-		(*contSec)++;
+		insertarSeccion(db, seccion);
 		}
 
 		fclose(ficheroSecciones);
