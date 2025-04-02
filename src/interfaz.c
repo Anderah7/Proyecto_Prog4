@@ -65,3 +65,25 @@ void interfazAnadirProducto(sqlite3 *db){
 	imprimirProducto(producto);
 
 }
+
+void interfazEliminarProducto(sqlite3 *db) {
+	int idProd;
+
+	int idMax = 0;
+	idMax = obtenerIdUltimoProducto(db);
+
+	printf("Introduce el id del producto a eliminar: \n");
+	fflush(stdout);
+	scanf("%i", &idProd);
+
+	while(idProd < 1 || idProd > idMax) {
+		printf("Este producto no existe\n");
+		printf("Los productos disponibles van del 1 al %i\n", idMax);
+		printf("Introduce el id del producto a eliminar: \n");
+		fflush(stdout);
+		scanf("%i", &idProd);
+	}
+
+		eliminarProducto(db, idProd);
+
+}

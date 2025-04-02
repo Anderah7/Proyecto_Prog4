@@ -13,4 +13,6 @@
 
 void interfazAnadirProducto(sqlite3 *db);
 
+void interfazEliminarProducto(sqlite3 *db);
+
 #endif /* INCLUDES_INTERFAZ_H_ */

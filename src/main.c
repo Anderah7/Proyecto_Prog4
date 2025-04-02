@@ -61,25 +61,7 @@ int main (void){
 		    	interfazAnadirProducto(db);
 		    }
 		    else if(opcion == '3') {
-		    	int idProd;
-		    	int idMax = obtenerIdUltimoProducto(db);
-		    	printf("%i", idMax);
-
-		    	printf("Introduce el id del producto a eliminar: \n");
-		    	fflush(stdout);
-		    	scanf("%i", &idProd);
-
-		    	while(idProd < 1 || idProd > idMax) {
-		    		printf("Este producto no existe\n");
-		    		printf("Los productos disponibles van del 1 al %i\n", idMax);
-		    		printf("Introduce el id del producto a eliminar: \n");
-		    		fflush(stdout);
-		    		scanf("%i", &idProd);
-
-		    	}
-
-		    	eliminarProducto(db, idProd);
-		    	mostrarProductos(db);
+		    	interfazEliminarProducto(db);
 
 		    }
 		    else if(opcion == '4') {
