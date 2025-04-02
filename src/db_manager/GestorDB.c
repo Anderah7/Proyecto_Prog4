@@ -28,42 +28,34 @@ void dropTables(sqlite3 * db) {
 }
 
 
-int mostrarProductos(sqlite3 *db, Producto **productos) {
+void mostrarProductos(sqlite3 *db) {
 
 	sqlite3_stmt *stmt;
 
 	char sql[] = "select id_Producto, nombre, precio, id_Proveedor, cod_Seccion from producto";
-	int contador = 0;
 
-	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
 	if (result != SQLITE_OK) {
-		printf("Error preparing statement (SELECT)\n");
-		printf("%s\n", sqlite3_errmsg(db));
-		return result;
+		printf("Error preparando la consulta SELECT\n");
+	    printf("%s\n", sqlite3_errmsg(db));
+	    return;
 	}
 
 	while (sqlite3_step(stmt) == SQLITE_ROW) {
-	    contador++;
-	}
+		int idProd = sqlite3_column_int(stmt, 0);
+		const unsigned char *nombreProd = sqlite3_column_text(stmt, 1);
+		double precio = sqlite3_column_double(stmt, 2);
+	    int codProveedor = sqlite3_column_int(stmt, 3);
+	    int codSeccion = sqlite3_column_int(stmt, 4);
 
-	sqlite3_reset(stmt);
-
-	*productos = (Producto *)malloc(contador * sizeof(Producto));
-
-	int i = 0;
-	while (sqlite3_step(stmt) == SQLITE_ROW) {
-	    (*productos)[i].idProd = sqlite3_column_int(stmt, 0);
-	    strncpy((*productos)[i].nombreProd, (const char *)sqlite3_column_text(stmt, 1), sizeof((*productos)[i].nombreProd) - 1);
-	    (*productos)[i].nombreProd[sizeof((*productos)[i].nombreProd) - 1] = '\0';
-	    (*productos)[i].precio = (float)sqlite3_column_double(stmt, 2);
-	    (*productos)[i].codProveedor = sqlite3_column_int(stmt, 3);
-	    (*productos)[i].codSeccion = sqlite3_column_int(stmt, 4);
-	    i++;
+	    if(!idProd == 0) {
+	    	printf("Producto: %d, Nombre: %s, Precio: %.2f, Proveedor: %d, Sección: %d\n", idProd, nombreProd, precio, codProveedor, codSeccion);
 	    }
+	}
+
 
 	sqlite3_finalize(stmt);
 
-	return contador;
 }
 
 

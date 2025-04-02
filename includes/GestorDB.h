@@ -13,7 +13,7 @@
 
 void dropTables(sqlite3 *db);
 
-int mostrarProductos(sqlite3 *db, Producto **productos);
+void mostrarProductos(sqlite3 *db);
 
 void anadirProducto (sqlite3 * db, Producto producto);
 

@@ -32,9 +32,6 @@ int main (void){
 
 
 
-	//Array de productos
-	Producto *productosCarga = NULL;
-	int num_productos = mostrarProductos(db, &productosCarga);
 
 	//Para la funcion ordenar
 	Producto **productosEstante;
@@ -57,10 +54,8 @@ int main (void){
 		    scanf(" %c", &opcion);
 
 		    if(opcion == '1') {
-		    	int num_productos = mostrarProductos(db, &productosCarga);
-		    	for (int i = 0; i < num_productos; ++i) {
-		    		printf("ID: %d, Nombre: %s, Precio: %.2f, Proveedor: %d, Seccion: %d\n", productos[i].idProd, productos[i].nombreProd, productos[i].precio, productos[i].codProveedor, productos[i].codSeccion);
-		        }
+		    	mostrarProductos(db);
+
 		    }
 		    else if(opcion == '2') {
 		    	interfazAnadirProducto(db);
@@ -84,11 +79,11 @@ int main (void){
 		    	}
 
 		    	eliminarProducto(db, idProd);
-		    	num_productos = mostrarProductos(db, &productosCarga);
+		    	mostrarProductos(db);
 
 		    }
 		    else if(opcion == '4') {
-		    	qsort(productos, num_productos, sizeof(Producto), compararPorPrecio);
+
 		    }
 		    else if(opcion == '5') {
 		    	int numProds = obtenerIdUltimoProducto(db);
