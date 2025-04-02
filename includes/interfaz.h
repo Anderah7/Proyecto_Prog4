@@ -11,6 +11,8 @@
 #include "../libs/sqlite3.h"
 #include "../includes/estructuras.h"
 
+void gestionarProductos(sqlite3 *db);
+
 void interfazAnadirProducto(sqlite3 *db);
 
 void interfazEliminarProducto(sqlite3 *db);

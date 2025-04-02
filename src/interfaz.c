@@ -13,6 +13,48 @@
 #include "../includes/estructuras.h"
 #include <stdlib.h>
 
+void gestionarProductos(sqlite3 *db) {
+	char opcion;
+
+			do {
+				printf("Bienvenido al gestor de productos\n");
+			    printf("1. Mostrar productos\n");
+			    printf("2. Añadir productos\n");
+			    printf("3. Eliminar producto\n");
+			    printf("4. Ordenar productos\n");
+			    printf("5. Ver estanteria\n");
+			    printf("Pulsar 'q' para salir\n");
+			    printf("Seleccione una opción:\n");
+			    fflush(stdout);
+			    scanf(" %c", &opcion);
+
+			    if(opcion == '1') {
+			    	mostrarProductos(db);
+
+			    }
+			    else if(opcion == '2') {
+			    	interfazAnadirProducto(db);
+			    }
+			    else if(opcion == '3') {
+			    	interfazEliminarProducto(db);
+
+			    }
+			    else if(opcion == '4') {
+			    	mostrarProductosOrden(db);
+			    }
+			    else if(opcion == '5') {
+			    	int numProds = obtenerIdUltimoProducto(db);
+//			    	ordenarEstante(productos, numProds, &productosEstante, &num_secciones, &seccionesEstante);
+//			    	mostrarProductosEstante(productosEstante, seccionesEstante, num_secciones);
+//			    	liberarMemoria(productosEstante, num_secciones);
+//			    	free(seccionesEstante);
+
+			    }
+
+			    } while (opcion != 'q');
+
+}
+
 void interfazAnadirProducto(sqlite3 *db){
 	Producto producto;
 
