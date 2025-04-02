@@ -75,6 +75,37 @@ void eliminarProducto(sqlite3 * db, int idProd) {
 	}
 }
 
+void mostrarProductosOrden(sqlite3 *db) {
+
+	sqlite3_stmt *stmt;
+
+	char sql[] = "select id_Producto, nombre, precio, id_Proveedor, cod_Seccion from producto order by precio DESC";
+
+	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+	if (result != SQLITE_OK) {
+		printf("Error preparando la consulta SELECT\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return;
+	}
+
+	while (sqlite3_step(stmt) == SQLITE_ROW) {
+		int idProd = sqlite3_column_int(stmt, 0);
+		const unsigned char *nombreProd = sqlite3_column_text(stmt, 1);
+		double precio = sqlite3_column_double(stmt, 2);
+		int codProveedor = sqlite3_column_int(stmt, 3);
+		int codSeccion = sqlite3_column_int(stmt, 4);
+
+		if(!idProd == 0) {
+			printf("Producto: %d, Nombre: %s, Precio: %.2f, Proveedor: %d, Sección: %d\n", idProd, nombreProd, precio, codProveedor, codSeccion);
+		}
+	}
+
+
+	sqlite3_finalize(stmt);
+
+
+}
+
 
 int obtenerIdUltimoProducto(sqlite3 *db) {
     sqlite3_stmt *stmt;

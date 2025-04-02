@@ -83,7 +83,7 @@ int main (void){
 
 		    }
 		    else if(opcion == '4') {
-
+		    	mostrarProductosOrden(db);
 		    }
 		    else if(opcion == '5') {
 		    	int numProds = obtenerIdUltimoProducto(db);
