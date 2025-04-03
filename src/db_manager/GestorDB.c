@@ -240,3 +240,29 @@ int obtenerIdUltimoProducto(sqlite3 *db) {
     return maximo;
 }
 
+void mostrarEmpleados(sqlite3 *db) {
+	sqlite3_stmt *stmt;
+
+	char sql[] = "select NSS_Empleado, nombre, id_Departamento, id_Seccion from empleado";
+
+	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+	if (result != SQLITE_OK) {
+		printf("Error preparando la consulta SELECT\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return;
+	}
+
+	while (sqlite3_step(stmt) == SQLITE_ROW) {
+		int NSS = sqlite3_column_int(stmt, 0);
+		const unsigned char *nombreEmp = sqlite3_column_text(stmt, 1);
+		int codDepartamento = sqlite3_column_int(stmt, 2);
+		int codSeccion = sqlite3_column_int(stmt, 3);
+
+		printf("Empleado: %d, Nombre: %s,, Departamento: %d, Sección: %d\n", NSS, nombreEmp, codDepartamento, codSeccion);
+	}
+
+	sqlite3_finalize(stmt);
+
+
+}
+

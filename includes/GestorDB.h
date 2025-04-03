@@ -27,4 +27,6 @@ void mostrarProductosOrden(sqlite3 *db);
 
 int obtenerIdUltimoProducto(sqlite3 *db);
 
+void mostrarEmpleados(sqlite3 *db);
+
 #endif /* SRC_DB_MANAGER_GESTORDB_H_ */

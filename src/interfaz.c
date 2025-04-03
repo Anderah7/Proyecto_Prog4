@@ -64,6 +64,7 @@ void gestionarProductos(sqlite3 *db) {
 
 }
 
+
 void interfazAnadirProducto(sqlite3 *db){
 	Producto producto;
 
@@ -138,3 +139,42 @@ void interfazEliminarProducto(sqlite3 *db) {
 		eliminarProducto(db, idProd);
 
 }
+
+
+void gestionarEmpleados(sqlite3 * db) {
+	char opcion;
+
+	do {
+		printf("Bienvenido al gestor de empleados\n");
+		printf("1. Mostrar empleados\n");
+		printf("2. Añadir empleado\n");
+		printf("3. Eliminar empleado\n");
+		printf("4. Modificar empleado\n");
+		printf("Pulsar 'q' para salir\n");
+		printf("Seleccione una opción:\n");
+		fflush(stdout);
+		scanf(" %c", &opcion);
+
+		if(opcion == '1') {
+			printf("1\n");
+			mostrarEmpleados(db);
+
+		}
+		else if(opcion == '2') {
+			printf("2\n");
+
+		}
+		else if(opcion == '3') {
+			printf("3\n");
+
+		}
+		else if(opcion == '4') {
+			printf("4\n");
+
+		}
+	}
+	while (opcion != 'q');
+
+
+}
+
