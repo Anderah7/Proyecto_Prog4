@@ -24,6 +24,7 @@ void gestionarProductos(sqlite3 *db) {
 			    printf("4. Modificar producto\n");
 			    printf("5. Ordenar productos\n");
 			    printf("6. Ver estanteria\n");
+			    printf("7. Buscar productos\n");
 			    printf("Pulsar 'q' para salir\n");
 			    printf("Seleccione una opción:\n");
 			    fflush(stdout);
@@ -53,6 +54,10 @@ void gestionarProductos(sqlite3 *db) {
 			    	//mostrarProductosEstante(productosEstante, seccionesEstante, num_secciones);
 			    	//liberarMemoria(productosEstante, num_secciones);
 			    	//free(seccionesEstante);
+			    }
+
+			    else if (opcion == '7') {
+			        buscarProductos(db);
 			    }
 
 			    } while (opcion != 'q');

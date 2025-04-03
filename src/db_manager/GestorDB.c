@@ -112,6 +112,85 @@ void modificarProducto(sqlite3 *db) {
 
 }
 
+void buscarProductos(sqlite3 *db) {
+	int opcion;
+	char nombreBuscador[50];
+
+	printf("Elige el modo de busqueda: \n");
+	printf("1: Buscar por nombre \n");
+	printf("2: Buscar por seccion\n");
+	fflush(stdout);
+	scanf("%i", &opcion);
+	getchar();
+	fflush(stdout);
+
+	if(opcion == 1) {
+		char sql[256];
+
+		printf("Elige el nombre del producto: \n");
+		fflush(stdout);
+		scanf("%s", &nombreBuscador);
+		getchar();
+		fflush(stdout);
+
+		 snprintf(sql, sizeof(sql), "SELECT id_Producto, nombre, precio, id_Proveedor, cod_Seccion FROM producto WHERE nombre LIKE '%%%s%%';", nombreBuscador);
+
+		 sqlite3_stmt *stmt;
+		 if (sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) == SQLITE_OK) {
+			 printf("\nResultados de la búsqueda por nombre:\n");
+			 while (sqlite3_step(stmt) == SQLITE_ROW) {
+				 int id = sqlite3_column_int(stmt, 0);
+				 const unsigned char *nombre = sqlite3_column_text(stmt, 1);
+				 float precio = (float)sqlite3_column_double(stmt, 2);
+				 int proveedor = sqlite3_column_int(stmt, 3);
+				 int seccion = sqlite3_column_int(stmt, 4);
+
+				 if(id != 0) {
+					 printf("ID: %d | Nombre: %s | Precio: %.2f | Proveedor: %d | Sección: %d\n", id, nombre, precio, proveedor, seccion);
+				 }
+			 }
+			 sqlite3_finalize(stmt);
+		     }
+		 else {
+			 printf("Error en la consulta: %s\n", sqlite3_errmsg(db));
+		 	 }
+
+	}
+	else if(opcion == 2) {
+		char sql[256];
+
+		printf("Elige la seccion del producto: \n");
+		fflush(stdout);
+		scanf("%s", &nombreBuscador);
+		getchar();
+		fflush(stdout);
+
+		snprintf(sql, sizeof(sql), "SELECT id_Producto, nombre, precio, id_Proveedor FROM producto WHERE cod_Seccion = %s;", nombreBuscador);
+
+		sqlite3_stmt *stmt;
+		if (sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) == SQLITE_OK) {
+			printf("\nResultados de la búsqueda por categoría:\n");
+			while (sqlite3_step(stmt) == SQLITE_ROW) {
+				int id = sqlite3_column_int(stmt, 0);
+		        const unsigned char *nombre = sqlite3_column_text(stmt, 1);
+		        float precio = (float)sqlite3_column_double(stmt, 2);
+		        int proveedor = sqlite3_column_int(stmt, 3);
+
+		        if(id != 0) {
+		        	printf("ID: %d | Nombre: %s | Precio: %.2f | Proveedor: %d\n", id, nombre, precio, proveedor);
+		        }
+				}
+			sqlite3_finalize(stmt);
+			}
+		else {
+			printf("Error en la consulta: %s\n", sqlite3_errmsg(db));
+		}
+	}
+	else {
+		printf("Opcion no valida \n");
+	}
+}
+
 void mostrarProductosOrden(sqlite3 *db) {
 
 	sqlite3_stmt *stmt;
