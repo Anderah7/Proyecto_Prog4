@@ -75,6 +75,43 @@ void eliminarProducto(sqlite3 * db, int idProd) {
 	}
 }
 
+void modificarProducto(sqlite3 *db) {
+	char * mensajeError = 0;
+	char sql[256];
+	int contador = obtenerIdUltimoProducto(db);
+	int id;
+	char nuevoNombre[50];
+	float nuevoPrecio;
+
+	printf("Ingrese el ID del producto a modificar: ");
+	fflush(stdout);
+	scanf("%d", &id);
+
+	while(id < 1 || id > contador) {
+		printf("ID incorrecto. Eliga id entre 1 y %i: ", contador);
+		fflush(stdout);
+		scanf("%d", &id);
+	}
+
+	printf("Ingrese el nuevo nombre: ");
+	fflush(stdout);
+	scanf("%s", &nuevoNombre);
+
+	printf("Ingrese el nuevo precio: ");
+	fflush(stdout);
+	scanf("%f", &nuevoPrecio);
+
+	sprintf(sql, "UPDATE producto SET nombre = '%s', precio = %.2f WHERE id_Producto = %d;", nuevoNombre, nuevoPrecio, id);
+
+	if (sqlite3_exec(db, sql, 0, 0, &mensajeError) != SQLITE_OK) {
+		printf("Error al eliminar el producto: %s\n", mensajeError);
+		sqlite3_free(mensajeError);
+	} else {
+		printf("Producto modificado: %i , nombre: %s\n", id, nuevoNombre);
+	}
+
+}
+
 void mostrarProductosOrden(sqlite3 *db) {
 
 	sqlite3_stmt *stmt;

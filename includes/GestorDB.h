@@ -19,6 +19,8 @@ void anadirProducto (sqlite3 * db, Producto producto);
 
 void eliminarProducto(sqlite3 * db, int idProd);
 
+void modificarProducto(sqlite3 *db);
+
 void mostrarProductosOrden(sqlite3 *db);
 
 int obtenerIdUltimoProducto(sqlite3 *db);
