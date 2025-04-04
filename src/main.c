@@ -28,7 +28,7 @@ int main (void){
 	    do {
 	        printf("\n==== MENÚ PRINCIPAL ====\n");
 	        printf("1. Gestión de Productos\n");
-	        printf("2. Otra funcionalidad (Ejemplo)\n");
+	        printf("2. Gestion de Empleados\n");
 	        printf("q. Salir del programa\n");
 	        printf("Seleccione una opción: ");
 	        fflush(stdout);
@@ -39,7 +39,7 @@ int main (void){
 	            	gestionarProductos(db);
 	                break;
 	            case '2':
-	                printf("Aquí iría otra funcionalidad...\n");
+	                gestionarEmpleados(db);
 	                break;
 	            case 'q':
 	                printf("Saliendo del programa...\n");

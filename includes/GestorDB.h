@@ -19,8 +19,14 @@ void anadirProducto (sqlite3 * db, Producto producto);
 
 void eliminarProducto(sqlite3 * db, int idProd);
 
+void modificarProducto(sqlite3 *db);
+
+void buscarProductos(sqlite3 *db);
+
 void mostrarProductosOrden(sqlite3 *db);
 
 int obtenerIdUltimoProducto(sqlite3 *db);
+
+void mostrarEmpleados(sqlite3 *db);
 
 #endif /* SRC_DB_MANAGER_GESTORDB_H_ */

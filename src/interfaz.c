@@ -21,8 +21,10 @@ void gestionarProductos(sqlite3 *db) {
 			    printf("1. Mostrar productos\n");
 			    printf("2. Añadir productos\n");
 			    printf("3. Eliminar producto\n");
-			    printf("4. Ordenar productos\n");
-			    printf("5. Ver estanteria\n");
+			    printf("4. Modificar producto\n");
+			    printf("5. Ordenar productos\n");
+			    printf("6. Ver estanteria\n");
+			    printf("7. Buscar productos\n");
 			    printf("Pulsar 'q' para salir\n");
 			    printf("Seleccione una opción:\n");
 			    fflush(stdout);
@@ -40,20 +42,28 @@ void gestionarProductos(sqlite3 *db) {
 
 			    }
 			    else if(opcion == '4') {
-			    	mostrarProductosOrden(db);
+			    	modificarProducto(db);
 			    }
 			    else if(opcion == '5') {
-			    	int numProds = obtenerIdUltimoProducto(db);
-//			    	ordenarEstante(productos, numProds, &productosEstante, &num_secciones, &seccionesEstante);
-//			    	mostrarProductosEstante(productosEstante, seccionesEstante, num_secciones);
-//			    	liberarMemoria(productosEstante, num_secciones);
-//			    	free(seccionesEstante);
+			    	mostrarProductosOrden(db);
 
+			    }
+			    else if(opcion == '6') {
+			    	int numProds = obtenerIdUltimoProducto(db);
+			    	//ordenarEstante(productos, numProds, &productosEstante, &num_secciones, &seccionesEstante);
+			    	//mostrarProductosEstante(productosEstante, seccionesEstante, num_secciones);
+			    	//liberarMemoria(productosEstante, num_secciones);
+			    	//free(seccionesEstante);
+			    }
+
+			    else if (opcion == '7') {
+			        buscarProductos(db);
 			    }
 
 			    } while (opcion != 'q');
 
 }
+
 
 void interfazAnadirProducto(sqlite3 *db){
 	Producto producto;
@@ -129,3 +139,42 @@ void interfazEliminarProducto(sqlite3 *db) {
 		eliminarProducto(db, idProd);
 
 }
+
+
+void gestionarEmpleados(sqlite3 * db) {
+	char opcion;
+
+	do {
+		printf("Bienvenido al gestor de empleados\n");
+		printf("1. Mostrar empleados\n");
+		printf("2. Añadir empleado\n");
+		printf("3. Eliminar empleado\n");
+		printf("4. Modificar empleado\n");
+		printf("Pulsar 'q' para salir\n");
+		printf("Seleccione una opción:\n");
+		fflush(stdout);
+		scanf(" %c", &opcion);
+
+		if(opcion == '1') {
+			printf("1\n");
+			mostrarEmpleados(db);
+
+		}
+		else if(opcion == '2') {
+			printf("2\n");
+
+		}
+		else if(opcion == '3') {
+			printf("3\n");
+
+		}
+		else if(opcion == '4') {
+			printf("4\n");
+
+		}
+	}
+	while (opcion != 'q');
+
+
+}
+
