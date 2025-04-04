@@ -9,11 +9,6 @@
 
 int main (void){
 
-	Departamento departamentos[100];
-	Empleado empleados[100];
-	Producto productos[200];
-	Proveedor proveedores[100];
-	Seccion secciones[100];
 
 
 	sqlite3 * db;
