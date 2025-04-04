@@ -9,8 +9,6 @@
 
 int main (void){
 
-
-
 	sqlite3 * db;
 	int abrir = sqlite3_open("database/adate.db", &db);
 
@@ -25,13 +23,6 @@ int main (void){
 	crearTablas(db);
 	cargarFicheros(db);
 
-
-
-
-	//Para la funcion ordenar
-	Producto **productosEstante;
-	int num_secciones;
-	int *seccionesEstante;
 
 	char opcion;
 	    do {
