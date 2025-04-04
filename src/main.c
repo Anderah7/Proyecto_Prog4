@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "../includes/operaciones.h"
-#include "../includes/initDatabase.h"
+#include "../includes/finalInitDatabase.h"
+#include "../includes/InitDatabase.h"
 #include "../includes/GestorDB.h"
 #include "../libs/sqlite3.h"
 #include "../includes/interfaz.h"
@@ -9,11 +10,11 @@
 
 int main (void){
 
-	Departamento departamentos[100];
-	Empleado empleados[100];
-	Producto productos[200];
-	Proveedor proveedores[100];
-	Seccion secciones[100];
+//	Departamento departamentos[100];
+//	Empleado empleados[100];
+//	Producto productos[200];
+//	Proveedor proveedores[100];
+//	Seccion secciones[100];
 
 
 	sqlite3 * db;
@@ -27,8 +28,11 @@ int main (void){
 	}
 
 	dropTables(db);
-	crearTablas(db);
-	cargarFicheros(db);
+	crearTablasInit(db);
+	cargarDepartamentosInit(db);
+	cargarProveedoresInit(db);
+
+//	cargarFicheros(db);
 
 
 
@@ -40,7 +44,7 @@ int main (void){
 
 	char opcion;
 	    do {
-	        printf("\n==== MENÚ PRINCIPAL ====\n");
+	        printf("\n==== ADATE: menú principal ====\n");
 	        printf("1. Gestión de Productos\n");
 	        printf("2. Gestion de Empleados\n");
 	        printf("q. Salir del programa\n");
