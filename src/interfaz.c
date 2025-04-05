@@ -118,6 +118,69 @@ void interfazAnadirProducto(sqlite3 *db){
 
 }
 
+void interfazAnadirEmpleado(sqlite3 *db){
+	Empleado empleado;
+
+	printf("Introduce el NSS del empleado: ");
+	fflush(stdout);
+	scanf("%i", &empleado.NSS);
+
+	while (empleado.NSS < 0000 || empleado.NSS > 9999) {
+			printf("Ese NSS no es valido\n");
+			printf("Introduce un numero entre 0000 y 9999\n");
+			fflush(stdout);
+			scanf("%i", &empleado.NSS);
+		};
+
+	printf("Introduce el nombre del empleado: ");
+	fflush(stdout);
+	scanf("%s", empleado.nombreEmpleado);
+
+	printf("Introduce la contraseña del empleado: ");
+	fflush(stdout);
+	scanf("%s", empleado.contrasena);
+
+	printf("Introduce id del departamento del empleado: ");
+	fflush(stdout);
+	scanf("%i", &empleado.idDepartamento);
+
+
+	while (empleado.idDepartamento < 1 || empleado.idDepartamento > 6) {
+		printf("Ese departamento no existe\n");
+		printf("Los separtamentos disponibles son:\n");
+		printf("1: Proveedor limpieza\n");
+		printf("2: Proveedor congelados\n");
+		printf("3: Proveedor carniceria\n");
+		printf("4: Proveedor pescaderia\n");
+		printf("5: Proveedor cereales\n");
+		printf("6: Proveedor electrodomesticos\n");
+		printf("Introduce el departamento del producto:\n");
+		fflush(stdout);
+		scanf("%i", &empleado.idDepartamento);
+	};
+
+	printf("Introduce la id de la seccion del empleado: ");
+	fflush(stdout);
+	scanf("%i", &empleado.codSeccion);
+
+	while (empleado.codSeccion < 1 || empleado.codSeccion > 6) {
+		printf("Esa seccion no existe\n");
+		printf("Las secciones disponibles son:\n");
+		printf("1: limpieza\n");
+		printf("2: congelados\n");
+		printf("3: carniceria\n");
+		printf("4: pescaderia\n");
+		printf("5: cereales\n");
+		printf("6: electrodomesticos\n");
+		printf("Introduce la seccion del producto:\n");
+		fflush(stdout);
+		scanf("%i", &empleado.codSeccion);
+			   }
+
+	insertarEmpleado(db, empleado);
+
+}
+
 
 
 void interfazEliminarProducto(sqlite3 *db) {
@@ -164,6 +227,7 @@ void gestionarEmpleados(sqlite3 * db) {
 		}
 		else if(opcion == '2') {
 			printf("2\n");
+			interfazAnadirEmpleado(db);
 
 		}
 		else if(opcion == '3') {
