@@ -15,6 +15,8 @@ void dropTables(sqlite3 *db);
 
 void mostrarProductos(sqlite3 *db);
 
+void eliminarEmpleado(sqlite3 * db, int NSS_empleado);
+
 void anadirProducto (sqlite3 * db, Producto producto);
 
 void eliminarProducto(sqlite3 * db, int idProd);

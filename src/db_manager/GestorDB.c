@@ -59,6 +59,21 @@ void mostrarProductos(sqlite3 *db) {
 }
 
 
+void eliminarEmpleado(sqlite3 * db, int NSS_empleado) {
+	char * mensajeError = 0;
+	char sql[256];
+
+	sprintf(sql, "DELETE FROM empleado WHERE NSS_Empleado = %i", NSS_empleado);
+
+	if (sqlite3_exec(db, sql, 0, 0, &mensajeError) != SQLITE_OK) {
+		printf("Error al eliminar el empleado: %s\n", mensajeError);
+		sqlite3_free(mensajeError);
+	} else {
+		printf("Empleado eliminado: %i\n", NSS_empleado);
+	}
+}
+
+
 void eliminarProducto(sqlite3 * db, int idProd) {
 	char * mensajeError = 0;
 	char sql[256];

@@ -15,6 +15,8 @@ void gestionarProductos(sqlite3 *db);
 
 void gestionarEmpleados(sqlite3 *db);
 
+void interfazEliminarEmpleado(sqlite3 *db);
+
 void interfazAnadirProducto(sqlite3 *db);
 
 void interfazAnadirEmpleado(sqlite3 *db);

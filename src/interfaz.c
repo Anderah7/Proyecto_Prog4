@@ -49,7 +49,7 @@ void gestionarProductos(sqlite3 *db) {
 
 			    }
 			    else if(opcion == '6') {
-			    	int numProds = obtenerIdUltimoProducto(db);
+			    	//int numProds = obtenerIdUltimoProducto(db);
 			    	//ordenarEstante(productos, numProds, &productosEstante, &num_secciones, &seccionesEstante);
 			    	//mostrarProductosEstante(productosEstante, seccionesEstante, num_secciones);
 			    	//liberarMemoria(productosEstante, num_secciones);
@@ -181,6 +181,15 @@ void interfazAnadirEmpleado(sqlite3 *db){
 
 }
 
+void interfazEliminarEmpleado(sqlite3 *db) {
+	int NSS_empleado;
+
+	printf("Introduce el NSS del empleado a eliminar: \n");
+	fflush(stdout);
+	scanf("%i", &NSS_empleado);
+	eliminarEmpleado(db, NSS_empleado);
+}
+
 
 
 void interfazEliminarProducto(sqlite3 *db) {
@@ -221,17 +230,15 @@ void gestionarEmpleados(sqlite3 * db) {
 		scanf(" %c", &opcion);
 
 		if(opcion == '1') {
-			printf("1\n");
 			mostrarEmpleados(db);
 
 		}
 		else if(opcion == '2') {
-			printf("2\n");
 			interfazAnadirEmpleado(db);
 
 		}
 		else if(opcion == '3') {
-			printf("3\n");
+			interfazEliminarEmpleado(db);
 
 		}
 		else if(opcion == '4') {
