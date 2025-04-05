@@ -6,12 +6,12 @@
  */
 #include <stdio.h>
 #include "../includes/operaciones.h"
-#include "../includes/initDatabase.h"
 #include "../includes/GestorDB.h"
 #include "../libs/sqlite3.h"
 #include "../includes/interfaz.h"
 #include "../includes/estructuras.h"
 #include <stdlib.h>
+#include "../includes/anadirDatosDB.h"
 
 void gestionarProductos(sqlite3 *db) {
 	char opcion;
@@ -117,6 +117,8 @@ void interfazAnadirProducto(sqlite3 *db){
 	imprimirProducto(producto);
 
 }
+
+
 
 void interfazEliminarProducto(sqlite3 *db) {
 	int idProd;

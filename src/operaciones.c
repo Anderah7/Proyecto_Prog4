@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "../includes/operaciones.h"
 #include "../libs/sqlite3.h"
-#include "../includes/initDatabase.h"
+#include "../includes/anadirDatosDB.h"
 #include <stdlib.h>
 #include <string.h>
 
