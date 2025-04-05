@@ -14,6 +14,9 @@
 
 void crearTablasInit(sqlite3 *db);
 void cargarProveedoresInit(sqlite3 *db);
+void cargarSeccionesInit(sqlite3 *db);
 void cargarDepartamentosInit(sqlite3 *db);
+void cargarEmpleadosInit(sqlite3 *db);
+void cargarProductosInit(sqlite3 *db);
 
 #endif /* INCLUDES_FINALINITDATABASE_H_ */

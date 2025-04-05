@@ -30,8 +30,12 @@ int main (void){
 
 	dropTables(db);
 	crearTablasInit(db);
-	cargarDepartamentosInit(db);
+
 	cargarProveedoresInit(db);
+	cargarSeccionesInit(db);
+	cargarDepartamentosInit(db);
+	cargarEmpleadosInit(db);
+	cargarProductosInit(db);
 
 //	cargarFicheros(db);
 
