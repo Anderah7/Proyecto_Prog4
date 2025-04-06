@@ -156,7 +156,7 @@ void interfazAnadirEmpleado(sqlite3 *db){
 		printf("4: Proveedor pescaderia\n");
 		printf("5: Proveedor cereales\n");
 		printf("6: Proveedor electrodomesticos\n");
-		printf("Introduce el departamento del producto:\n");
+		printf("Introduce el departamento del nuevo empleado:\n");
 		fflush(stdout);
 		scanf("%i", &empleado.idDepartamento);
 	};
@@ -244,7 +244,7 @@ void gestionarEmpleados(sqlite3 * db) {
 
 		}
 		else if(opcion == '4') {
-			printf("4\n");
+			modificarEmpleado(db);
 
 		}
 	}

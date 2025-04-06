@@ -128,6 +128,74 @@ void modificarProducto(sqlite3 *db) {
 
 }
 
+void modificarEmpleado(sqlite3 *db) {
+	char * mensajeError = 0;
+	char sql[256];
+	int NSS;
+	char nuevoNombre[50];
+	char nuevaContrasena[50];
+	int idDepartamento;
+	int idSeccion;
+
+	printf("Ingrese el NSS del empleado a modificar:\n ");
+	fflush(stdout);
+	scanf("%i", &NSS);
+
+	printf("Ingrese el nuevo nombre:\n ");
+	fflush(stdout);
+	scanf("%s", nuevoNombre);
+
+	printf("Ingrese la nueva contraseña:\n ");
+	fflush(stdout);
+	scanf("%s", nuevaContrasena);
+
+	printf("Introduce la nueva id de departamento:\n ");
+	fflush(stdout);
+	scanf("%i", &idDepartamento);
+
+	while (idDepartamento < 1 || idDepartamento > 6) {
+		printf("Ese departamento no existe\n");
+		printf("Los separtamentos disponibles son:\n");
+		printf("1: Proveedor limpieza\n");
+		printf("2: Proveedor congelados\n");
+		printf("3: Proveedor carniceria\n");
+		printf("4: Proveedor pescaderia\n");
+		printf("5: Proveedor cereales\n");
+		printf("6: Proveedor electrodomesticos\n");
+		printf("Introduce la nueva id de departamento:\n");
+		fflush(stdout);
+		scanf("%i", &idDepartamento);
+	};
+
+	printf("Introduce la id nueva id de seccion:\n ");
+		fflush(stdout);
+		scanf("%i", &idSeccion);
+
+		while (idSeccion < 1 || idSeccion > 6) {
+			printf("Esa seccion no existe\n");
+			printf("Las secciones disponibles son:\n");
+			printf("1: limpieza\n");
+			printf("2: congelados\n");
+			printf("3: carniceria\n");
+			printf("4: pescaderia\n");
+			printf("5: cereales\n");
+			printf("6: electrodomesticos\n");
+			printf("Introduce la id nueva id de seccion:\n");
+			fflush(stdout);
+			scanf("%i", &idSeccion);
+				   }
+
+	sprintf(sql, "UPDATE empleado SET nombre = '%s', contrasena = '%s', id_Departamento = %i, id_Seccion = %i  WHERE NSS_Empleado = %i;", nuevoNombre, nuevaContrasena, idDepartamento, idSeccion, NSS);
+
+	if (sqlite3_exec(db, sql, 0, 0, &mensajeError) != SQLITE_OK) {
+		printf("Error al modificar el empleado: %s\n", mensajeError);
+		sqlite3_free(mensajeError);
+	} else {
+		printf("Empleado modificado: NSS: %i , nombre: %s, contraseña: %s, departamento: %i, seccion: %i\n", NSS, nuevoNombre, nuevaContrasena, idDepartamento, idSeccion);
+	}
+
+}
+
 void buscarProductos(sqlite3 *db) {
 	int opcion;
 	char nombreBuscador[50];

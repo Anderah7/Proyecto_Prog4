@@ -23,6 +23,8 @@ void eliminarProducto(sqlite3 * db, int idProd);
 
 void modificarProducto(sqlite3 *db);
 
+void modificarEmpleado(sqlite3 *db);
+
 void buscarProductos(sqlite3 *db);
 
 void mostrarProductosOrden(sqlite3 *db);
