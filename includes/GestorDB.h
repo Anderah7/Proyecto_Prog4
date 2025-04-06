@@ -31,4 +31,7 @@ int obtenerIdUltimoProducto(sqlite3 *db);
 
 void mostrarEmpleados(sqlite3 *db);
 
+void obtenerAdministrativo(sqlite3 *db, Empleado *e);
+
+void editarJefeDepartamento(sqlite3 *db, int i);
 #endif /* SRC_DB_MANAGER_GESTORDB_H_ */

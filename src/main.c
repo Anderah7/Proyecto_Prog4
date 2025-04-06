@@ -28,23 +28,18 @@ int main (void){
 	    printf("Conectado a la bd\n");
 	}
 
-	dropTables(db);
-	crearTablasInit(db);
 
-	cargarProveedoresInit(db);
-	cargarSeccionesInit(db);
-	cargarDepartamentosInit(db);
-	cargarEmpleadosInit(db);
-	cargarProductosInit(db);
 
 //	cargarFicheros(db);
-
+	crearTablasInit(db);
 
 	char opcion;
 	    do {
 	        printf("\n==== ADATE: menú principal ====\n");
 	        printf("1. Gestión de Productos\n");
-	        printf("2. Gestion de Empleados\n");
+	        printf("2. Gestión de Empleados\n");
+	        printf("3. Gestión de la BBDD\n");
+	        printf("4. Introducir datos.\n");
 	        printf("q. Salir del programa\n");
 	        printf("Seleccione una opción: ");
 	        fflush(stdout);
@@ -57,6 +52,12 @@ int main (void){
 	            case '2':
 	                gestionarEmpleados(db);
 	                break;
+	            case '3':
+	                gestionarBBDD(db);
+	                break;
+	            case '4':
+	            	introducirDatosDesdeCSV(db);
+	            	break;
 	            case 'q':
 	                printf("Saliendo del programa...\n");
 	                break;

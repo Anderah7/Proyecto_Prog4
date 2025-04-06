@@ -5,6 +5,7 @@
  *      Author: j.fernandezde
  */
 #include "../../includes/GestorDB.h"
+#include "../../includes/interfaz.h"
 
 #include <stdio.h>
 #include "../../libs/sqlite3.h"
@@ -278,6 +279,55 @@ void mostrarEmpleados(sqlite3 *db) {
 
 	sqlite3_finalize(stmt);
 
+}
 
+void obtenerAdministrativo(sqlite3 *db, Empleado *e) {
+    sqlite3_stmt *stmt;
+
+    char sql[] = "SELECT E.NSS_EMPLEADO, E.NOMBRE, E.CONTRASENA, E.ID_DEPARTAMENTO, E.ID_SECCION "
+                 "FROM EMPLEADO E, DEPARTAMENTO D "
+                 "WHERE D.NSS_JEFE = E.NSS_EMPLEADO AND D.NOMBRE = 'Administrativo'";
+
+    int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+    if (result != SQLITE_OK) {
+        printf("Error preparando la consulta SELECT\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        return;
+    }
+
+    if (sqlite3_step(stmt) == SQLITE_ROW) {
+        e->NSS = sqlite3_column_int(stmt, 0);
+        strcpy(e->nombreEmpleado, (const char *)sqlite3_column_text(stmt, 1));
+        strcpy(e->contrasena, (const char *)sqlite3_column_text(stmt, 2));
+        e->idDepartamento = sqlite3_column_int(stmt, 3);
+        e->codSeccion = sqlite3_column_int(stmt, 4);
+
+
+    } else {
+        printf("No se encontró ningún empleado administrativo.\n");
+    }
+
+    sqlite3_finalize(stmt);
+}
+
+void editarJefeDepartamento(sqlite3 *db, int numDept) {
+    char *mensajeError = 0;
+    char sql[150];
+    int nuevoNSS;
+
+    printf("Introduce el NSS del nuevo jefe del departamento %i\n", numDept);
+    fflush(stdout);
+    scanf("%i", &nuevoNSS);
+    sprintf(sql, "UPDATE departamento SET NSS_Jefe = %i WHERE id_Departamento = %i", nuevoNSS, numDept);
+
+    if (sqlite3_exec(db, sql, 0, 0, &mensajeError) != SQLITE_OK) {
+        printf("Error al actualizar el jefe del departamento %i: %s\n", numDept, mensajeError);
+        sqlite3_free(mensajeError);
+    } else {
+        printf("El nuevo jefe es %i\n", nuevoNSS);
+        fflush(stdout);
+        gestionarBBDD(db);
+
+    }
 }
 

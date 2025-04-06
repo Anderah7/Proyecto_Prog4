@@ -71,6 +71,48 @@ void crearTablasInit(sqlite3 *db) {
 
 }
 
+//void cargarProveedoresInit(sqlite3 *db) {
+//	char archivos_csv[] = "database/datosIniciales/proveedores.csv";
+//    FILE *archivo = fopen(archivos_csv, "r");
+//    if (!archivo) {
+//        perror("No se pudo abrir proveedores.csv");
+//        return;
+//    }
+//
+//    char *error_msg = NULL;
+//    char linea[256];
+//
+//    while (fgets(linea, sizeof(linea), archivo)) {
+//        int id;
+//        char nombre[31], contrasena[31];
+//        int codigo_postal;
+//
+//        // Quitar salto de línea
+////        linea[strcspn(linea, "\n")] = 0;
+//
+//        // Parsear los valores
+//        if (sscanf(linea, "%d,%30[^,],%d,%30[^\n]", &id, nombre, &codigo_postal, contrasena) != 4) {
+//            fprintf(stderr, "Error al parsear línea: %s\n", linea);
+//            continue;
+//        }
+//
+//        // Crear consulta
+//        char consulta[512];
+//        snprintf(consulta, sizeof(consulta),
+//                 "INSERT INTO proveedor (id_Proveedor, nombre, codigo_Postal, contrasena) "
+//                 "VALUES (%d, '%s', %d, '%s');",
+//                 id, nombre, codigo_postal, contrasena);
+//
+//        // Ejecutar consulta
+//        if (sqlite3_exec(db, consulta, 0, 0, &error_msg) != SQLITE_OK) {
+//            fprintf(stderr, "Error en INSERT: %s\n", error_msg);
+//            sqlite3_free(error_msg);
+//        }
+//    }
+//    fclose(archivo);
+//
+//}
+
 void cargarProveedoresInit(sqlite3 *db) {
 	char archivos_csv[] = "database/datosIniciales/proveedores.csv";
     FILE *archivo = fopen(archivos_csv, "r");
@@ -80,9 +122,10 @@ void cargarProveedoresInit(sqlite3 *db) {
     }
 
     char *error_msg = NULL;
-    char linea[256];
+    char *linea;
+    linea = malloc(256 * sizeof(char));  // Prueba con memoria dinámica.
 
-    while (fgets(linea, sizeof(linea), archivo)) {
+    while (fgets(linea, 256 + sizeof(char), archivo)) {
         int id;
         char nombre[31], contrasena[31];
         int codigo_postal;
@@ -99,7 +142,7 @@ void cargarProveedoresInit(sqlite3 *db) {
         // Crear consulta
         char consulta[512];
         snprintf(consulta, sizeof(consulta),
-                 "INSERT INTO proveedor (id_Proveedor, nombre, codigo_Postal, contrasena) "
+                 "INSERT OR IGNORE INTO proveedor (id_Proveedor, nombre, codigo_Postal, contrasena) "
                  "VALUES (%d, '%s', %d, '%s');",
                  id, nombre, codigo_postal, contrasena);
 
@@ -109,6 +152,7 @@ void cargarProveedoresInit(sqlite3 *db) {
             sqlite3_free(error_msg);
         }
     }
+    free(linea);
     fclose(archivo);
 
 }
@@ -138,7 +182,7 @@ void cargarSeccionesInit(sqlite3 *db) {
         // Crear consulta
         char consulta[512];
         snprintf(consulta, sizeof(consulta),
-                 "INSERT INTO seccion (cod_seccion, nombre) "
+                 "INSERT OR IGNORE INTO seccion (cod_seccion, nombre) "
                  "VALUES (%d, '%s');",
                  cod_seccion, nombre);
 
@@ -179,7 +223,7 @@ void cargarDepartamentosInit(sqlite3 *db) {
         // Crear consulta
         char consulta[512];
         snprintf(consulta, sizeof(consulta),
-                 "INSERT INTO departamento (id_Departamento, nombre, NSS_Jefe) "
+                 "INSERT OR IGNORE INTO departamento (id_Departamento, nombre, NSS_Jefe) "
                  "VALUES (%d, '%s', %d);",
                  id, nombre, NSS_Jefe);
 
@@ -225,12 +269,11 @@ void cargarEmpleadosInit(sqlite3 *db) {
 //                    fprintf(stderr, "Error al parsear línea: %s\n", linea);
 //                    continue;
 //                }
-        printf(linea);
-        printf("\n");
+
         // Crear consulta
         char consulta[512];
         snprintf(consulta, sizeof(consulta),
-                 "INSERT INTO empleado (NSS_Empleado, nombre, contrasena, id_Departamento, id_Seccion) "
+                 "INSERT OR IGNORE INTO empleado (NSS_Empleado, nombre, contrasena, id_Departamento, id_Seccion) "
                  "VALUES (%d, '%s', '%s', %d, %d);",
 				 NSS_Empleado, nombre, contrasenya, id_Departamento, id_Seccion);
 
@@ -275,7 +318,7 @@ void cargarProductosInit(sqlite3 *db) {
         // Crear consulta SQL para productos
         char consulta[512];
         snprintf(consulta, sizeof(consulta),
-                 "INSERT INTO producto (id_Producto, nombre, precio, id_Proveedor, cod_Seccion) "
+                 "INSERT OR IGNORE INTO producto (id_Producto, nombre, precio, id_Proveedor, cod_Seccion) "
                  "VALUES (%d, '%s', %.2f, %d, %d);",
                  id_Producto, nombre, precio, id_Proveedor, cod_Seccion);
 

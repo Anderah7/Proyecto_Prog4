@@ -110,3 +110,4 @@ void liberarMemoria(Producto **productosEstante, int num_secciones) {
 
 
 
+
