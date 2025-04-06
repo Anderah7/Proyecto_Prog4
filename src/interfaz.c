@@ -308,7 +308,8 @@ void interfazBBDD(sqlite3* db, char *opOr) {
 	printf("Como jefe del departamento administrativo, puedes:\n");
 		do {
 			printf("Opciones:\n");
-			printf("1. Reiniciar la BBDD por completo (esto puede quitarte el poder administrativo si no eres el administrador principal).\n");
+			printf("ATENCION: algunas opciones puede quitarte el poder administrativo si no eres el administrador principal!!!.\n");
+			printf("1. Reiniciar la BBDD por completo\n");
 			printf("2. Eliminar la BBDD\n");
 			printf("3. Crear las tablas de la BBDD.\n");
 			printf("4. Introducir los datos en la BBDD.\n");
