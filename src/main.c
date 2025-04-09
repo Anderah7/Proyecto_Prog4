@@ -23,10 +23,10 @@ int main (void){
 	    printf("Conectado a la bd\n");
 	}
 
-	dropTables(db);
+	//dropTables(db);
 	//introducirDatosDesdeCSV(db, config);
 	crearTablasInit(db);
- int i;
+
 	char opcion;
 	    do {
 	        printf("\n==== ADATE: menú principal ====\n");
