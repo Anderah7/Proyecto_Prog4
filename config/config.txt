@@ -1,4 +1,4 @@
-database: adate.db
+database: ../../database/adate.db
 fichero_departamentos: ../../database/datosIniciales/departamentos.csv
 fichero_empleados: ../../database/datosIniciales/empleados.csv
 fichero_productos: ../../database/datosIniciales/productos.csv
