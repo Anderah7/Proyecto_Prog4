@@ -255,7 +255,7 @@ void gestionarEmpleados(sqlite3 * db) {
 
 }
 
-void gestionarBBDD(sqlite3 * db) {  	// La constraseña es pass12
+void gestionarBBDD(sqlite3 * db, Config config) {  	// La constraseña es pass12
 	Empleado e;
 	obtenerAdministrativo(db, &e);
 
@@ -274,7 +274,7 @@ void gestionarBBDD(sqlite3 * db) {  	// La constraseña es pass12
 				printf("Bienvenido\n");
 				fflush(stdout);
 				contrasenaCorrecta = 1;
-				interfazBBDD(db, &opcion);
+				interfazBBDD(db, &opcion, config);
 			} else {
 
 				contador += 1;
@@ -305,7 +305,7 @@ void gestionarBBDD(sqlite3 * db) {  	// La constraseña es pass12
 		while (opcion != 'q');
 }
 
-void interfazBBDD(sqlite3* db, char *opOr) {
+void interfazBBDD(sqlite3* db, char *opOr, Config config) {
 	char opcion;
 	printf("Como jefe del departamento administrativo, puedes:\n");
 		do {
@@ -332,7 +332,7 @@ void interfazBBDD(sqlite3* db, char *opOr) {
 				crearTablasInit(db);
 
 
-				introducirDatosDesdeCSV(db);
+				introducirDatosDesdeCSV(db, config);
 
 
 				printf("BASE DE DATOS REINICIADA\n");
@@ -362,7 +362,7 @@ void interfazBBDD(sqlite3* db, char *opOr) {
 					fflush(stdout);
 					scanf(" %s", &opcion4);
 					if (opcion4 == 's') {
-						introducirDatosDesdeCSV(db);
+						introducirDatosDesdeCSV(db, config);
 						opcion4 = 'n';
 					}
 
@@ -371,7 +371,7 @@ void interfazBBDD(sqlite3* db, char *opOr) {
 			 }
 			else if(opcion == '5') {
 				printf("Bienvenido al gestor del jefe del departamento administrativo.\n");
-				editarJefeDepartamento(db, 7);
+				editarJefeDepartamento(db, 7, config);
 				printf("Gracias por usar nuestros servicios, hasta pronto.\n");
 				opcion = 'q';
 				*opOr ='q';
@@ -384,28 +384,6 @@ void interfazBBDD(sqlite3* db, char *opOr) {
 		while (opcion != 'q');
 }
 
-void introducirDatosDesdeCSV(sqlite3 *db) {
-	printf("Introduciendo datos base desde los CSVs...\n");
 
-		cargarProveedoresInit(db);
-		printf("Proveedores añadidos\n");
-
-
-		cargarSeccionesInit(db);
-		printf("Secciones añadidas\n");
-
-
-		cargarDepartamentosInit(db);
-		printf("Departamentos añadidos\n");
-
-
-		cargarEmpleadosInit(db);
-		printf("Empleados añadidos\n");
-
-
-		cargarProductosInit(db);
-		printf("Productos añadidos\n");
-
-}
 
 

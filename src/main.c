@@ -6,20 +6,15 @@
 #include "../libs/sqlite3.h"
 #include "../includes/interfaz.h"
 #include "../includes/estructuras.h"
+#include "../includes/config.h"
 #include <stdlib.h>
 
 int main (void){
-
-//	Departamento departamentos[100];
-//	Empleado empleados[100];
-//	Producto productos[200];
-//	Proveedor proveedores[100];
-//	Seccion secciones[100];
-
-
+	Config config;
+	cargarConfig("config/config.txt", &config);
 
 	sqlite3 * db;
-	int abrir = sqlite3_open("database/adate.db", &db);
+	int abrir = sqlite3_open(config.database, &db);
 
 	if (abrir) {
 	    printf("Error al conectar a la bd: %s\n", sqlite3_errmsg(db));
@@ -29,8 +24,7 @@ int main (void){
 	}
 
 
-
-//	cargarFicheros(db);
+	//introducirDatosDesdeCSV(db, config);
 	crearTablasInit(db);
 
 	char opcion;
@@ -53,10 +47,10 @@ int main (void){
 	                gestionarEmpleados(db);
 	                break;
 	            case '3':
-	                gestionarBBDD(db);
+	                gestionarBBDD(db, config);
 	                break;
 	            case '4':
-	            	introducirDatosDesdeCSV(db);
+	            	introducirDatosDesdeCSV(db, config);
 	            	break;
 	            case 'q':
 	                printf("Saliendo del programa...\n");

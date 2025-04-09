@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include "../../includes/finalInitDatabase.h"
 #include "../../libs/sqlite3.h"
+#include "../../includes/config.h"
 #include <stdlib.h>
 #include <string.h>
 
@@ -113,8 +114,7 @@ void crearTablasInit(sqlite3 *db) {
 //
 //}
 
-void cargarProveedoresInit(sqlite3 *db) {
-	char archivos_csv[] = "database/datosIniciales/proveedores.csv";
+void cargarProveedoresInit(sqlite3 *db, char* archivos_csv) {
     FILE *archivo = fopen(archivos_csv, "r");
     if (!archivo) {
         perror("No se pudo abrir proveedores.csv");
@@ -157,8 +157,7 @@ void cargarProveedoresInit(sqlite3 *db) {
 
 }
 
-void cargarSeccionesInit(sqlite3 *db) {
-	char archivos_csv[] = "database/datosIniciales/secciones.csv";
+void cargarSeccionesInit(sqlite3 *db, char* archivos_csv) {
     FILE *archivo = fopen(archivos_csv, "r");
     if (!archivo) {
         perror("No se pudo abrir secciones.csv");
@@ -196,8 +195,7 @@ void cargarSeccionesInit(sqlite3 *db) {
 
 }
 
-void cargarDepartamentosInit(sqlite3 *db) {
-	char archivos_csv[] = "database/datosIniciales/departamentos.csv";
+void cargarDepartamentosInit(sqlite3 *db, char* archivos_csv) {
     FILE *archivo = fopen(archivos_csv, "r");
     if (!archivo) {
         perror("No se pudo abrir departamentos.csv");
@@ -237,8 +235,7 @@ void cargarDepartamentosInit(sqlite3 *db) {
     fclose(archivo);
 }
 
-void cargarEmpleadosInit(sqlite3 *db) {
-	char archivos_csv[] = "database/datosIniciales/empleados.csv";
+void cargarEmpleadosInit(sqlite3 *db, char* archivos_csv) {
 	sqlite3_exec(db, "PRAGMA foreign_keys = ON;", 0, 0, NULL);
     FILE *archivo = fopen(archivos_csv, "r");
     if (!archivo) {
@@ -287,8 +284,7 @@ void cargarEmpleadosInit(sqlite3 *db) {
     fclose(archivo);
 }
 
-void cargarProductosInit(sqlite3 *db) {
-	char archivos_csv[] = "database/datosIniciales/productos.csv";
+void cargarProductosInit(sqlite3 *db, char* archivos_csv) {
     FILE *archivo = fopen(archivos_csv, "r");
     if (!archivo) {
         perror("No se pudo abrir productos.csv");
@@ -330,4 +326,28 @@ void cargarProductosInit(sqlite3 *db) {
     }
 
     fclose(archivo);
+}
+
+void introducirDatosDesdeCSV(sqlite3 *db, Config config) {
+	printf("Introduciendo datos base desde los CSVs...\n");
+
+		cargarProveedoresInit(db, config.fichero_proveedores);
+		printf("Proveedores añadidos\n");
+
+
+		cargarSeccionesInit(db, config.fichero_secciones);
+		printf("Secciones añadidas\n");
+
+
+		cargarDepartamentosInit(db, config.fichero_departamentos);
+		printf("Departamentos añadidos\n");
+
+
+		cargarEmpleadosInit(db, config.fichero_empleados);
+		printf("Empleados añadidos\n");
+
+
+		cargarProductosInit(db, config.fichero_productos);
+		printf("Productos añadidos\n");
+
 }

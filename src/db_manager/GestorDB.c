@@ -378,7 +378,7 @@ void obtenerAdministrativo(sqlite3 *db, Empleado *e) {
     sqlite3_finalize(stmt);
 }
 
-void editarJefeDepartamento(sqlite3 *db, int numDept) {
+void editarJefeDepartamento(sqlite3 *db, int numDept, Config config) {
     char *mensajeError = 0;
     char sql[150];
     int nuevoNSS;
@@ -394,7 +394,7 @@ void editarJefeDepartamento(sqlite3 *db, int numDept) {
     } else {
         printf("El nuevo jefe es %i\n", nuevoNSS);
         fflush(stdout);
-        gestionarBBDD(db);
+        gestionarBBDD(db, config);
 
     }
 }

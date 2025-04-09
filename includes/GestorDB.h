@@ -10,6 +10,7 @@
 
 #include "../libs/sqlite3.h"
 #include "../includes/estructuras.h"
+#include "config.h"
 
 void dropTables(sqlite3 *db);
 
@@ -35,5 +36,5 @@ void mostrarEmpleados(sqlite3 *db);
 
 void obtenerAdministrativo(sqlite3 *db, Empleado *e);
 
-void editarJefeDepartamento(sqlite3 *db, int i);
+void editarJefeDepartamento(sqlite3 *db, int i, Config config);
 #endif /* SRC_DB_MANAGER_GESTORDB_H_ */
